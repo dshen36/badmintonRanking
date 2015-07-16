@@ -1,15 +1,15 @@
 import java.util.ArrayList; 
 public class Player {
-	String name;
-	String school;
-	int playerID;
+	private String name;
+	private String school;
+	private int playerID;
 	//double schoolRanking;
-	double ranking;
-	int weeklyMatches;
+	private double ranking;
+	private int weeklyMatches;
 	//statistical career
-	int careerPoints;
-	int numGames;
-	int numWins;
+	private int careerPoints;
+	private int numGames;
+	private int numWins;
 	//past rankings in arrayList
 
 	public Player(String name,String school) {
@@ -42,22 +42,23 @@ public class Player {
 	public void setWeeklyMatches(int weeklyMatches) {
 		this.weeklyMatches = weeklyMatches;
 	}
-	public String getCareerPoints() {
+	//
+	public int getCareerPoints() {
 		return careerPoints;
 	}
-	public void setCareerPoints(careerPoints) {
+	public void setCareerPoints(int careerPoints) {
 		this.careerPoints = careerPoints;
 	}
-	public String getNumGames() {
+	public int getNumGames() {
 		return numGames;
 	}
-	public void setCareerPoints(numGames) {
+	public void setNumGames(int numGames) {
 		this.numGames = numGames;
 	}
-	public String getNumWins() {
+	public int getNumWins() {
 		return numWins;
 	}
-	public void setCareerPoints(numWins) {
+	public void setNumWins(int numWins) {
 		this.numWins = numWins;
 	}
 }

@@ -2,8 +2,14 @@ import java.util.ArrayList;
 public class Player {
 	String name;
 	String school;
+	int playerID;
+	//double schoolRanking;
 	double ranking;
 	int weeklyMatches;
+	//statistical career
+	int careerPoints;
+	int numGames;
+	int numWins;
 	//past rankings in arrayList
 
 	public Player(String name,String school) {
@@ -35,5 +41,23 @@ public class Player {
 	}
 	public void setWeeklyMatches(int weeklyMatches) {
 		this.weeklyMatches = weeklyMatches;
+	}
+	public String getCareerPoints() {
+		return careerPoints;
+	}
+	public void setCareerPoints(careerPoints) {
+		this.careerPoints = careerPoints;
+	}
+	public String getNumGames() {
+		return numGames;
+	}
+	public void setCareerPoints(numGames) {
+		this.numGames = numGames;
+	}
+	public String getNumWins() {
+		return numWins;
+	}
+	public void setCareerPoints(numWins) {
+		this.numWins = numWins;
 	}
 }

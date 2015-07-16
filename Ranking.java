@@ -1,3 +1,7 @@
+/*names: smash seed
+		 smash feed
+		 feather feed*/
+
 public class Ranking {
 	public static void main(String[] args) {
 		 Player dan = new Player("Dan","GT");

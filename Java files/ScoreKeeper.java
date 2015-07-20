@@ -16,6 +16,7 @@ public class ScoreKeeper {
 		this.p1 = p1;
 		this.p2 = p2;
 		totalRallies = 0;
+		maxScore = 21;
 		scoreHistory1.set(0,0); //(rally#.currentScore)
 		scoreHistory2.set(0,0);
 		winnerHistory.set(0,null);
@@ -54,6 +55,11 @@ public class ScoreKeeper {
 	//THEN CHECK TO SEE IF GAME OVER (PAST MAX SCORE), THEN CHECKS TO SEE IF WON BY 2.
 	//IF YES, RETURN WINNER AFTER SETTING ALL OF THE SCORES/ARRAYLISTS
 	//ELSE (GAME NOT OVER) SET ALL OF THE SCORES, INCREASE THE MAX SCORE.
+	public void game() {
+		while (!passedMax) { //no one has scored to the 21 point mark
+			//prompts user for point
+		}
+	}
 	public boolean wonByTwo() {
 		if (Math.abs(scoreHistory1.get(totalRallies) - scoreHistory2.get(totalRallies)) > 1) {
 			return true;

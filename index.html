@@ -1,0 +1,168 @@
+<!doctype html>
+<head>
+    <meta charset="utf-8">
+
+    <title>My Parse App</title>
+    <meta name="description" content="My Parse App">
+    <meta name="viewport" content="width=device-width">
+    <!-- <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/styles.css"> -->
+    <link rel="stylesheet"  href="css/bootstrap.min.css">
+    <!-- <link rel="stylesheet"  href="css/custom.css"> -->
+    <script type="text/javascript" src="jQuery.js"></script>
+    <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.5.0.min.js"></script>
+    
+    <script src="script.js"></script>
+    <link rel="stylesheet" type="text/css" href="fontAwesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="navbar.css">
+</head>
+
+<body>
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~NAVBAR~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+    <nav class="navbar navbar-default navbar-inverse" role="navigation">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Feather Feed</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li class="active " style="text-align:center;" ><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#submitGame" style="margin-top:7px;"> Report Match </button></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li class="divider"></li>
+                <li><a href="#">Separated link</a></li>
+                <li class="divider"></li>
+                <li><a href="#">One more separated link</a></li>
+              </ul>
+            </li>
+          </ul>
+          <form class="navbar-form navbar-left" role="search">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Search">
+            </div>
+            <button type="submit" class="btn btn-default">Submit</button>
+          </form>
+          <ul class="nav navbar-nav navbar-right">
+            <li><p class="navbar-text">Already have an account?</p></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></a>
+                <ul id="login-dp" class="dropdown-menu">
+                    <li>
+                         <div class="row">
+                                <div class="col-md-12">
+                                    Login via
+                                    <div class="social-buttons">
+                                        <a href="#" class="btn btn-fb"><i class="fa fa-facebook-square"></i> Facebook</a>
+                                        <a href="#" class="btn btn-tw"><i class="fa fa-twitter"></i> Twitter</a>
+                                    </div>
+                                    or
+                                     <form class="form" role="form" method="post" action="login" accept-charset="UTF-8" id="login-nav">
+                                            <div class="form-group">
+                                                 <label class="sr-only" for="exampleInputEmail2">Email address</label>
+                                                 <input type="email" class="form-control" id="exampleInputEmail2" placeholder="Email address" required>
+                                            </div>
+                                            <div class="form-group">
+                                                 <label class="sr-only" for="exampleInputPassword2">Password</label>
+                                                 <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password" required>
+                                                 <div class="help-block text-right"><a href="">Forget the password ?</a></div>
+                                            </div>
+                                            <div class="form-group">
+                                                 <button type="submit" class="btn btn-primary btn-block">Sign in</button>
+                                            </div>
+                                            <div class="checkbox">
+                                                 <label>
+                                                 <input type="checkbox"> keep me logged-in
+                                                 </label>
+                                            </div>
+                                     </form>
+                                </div>
+                                <div class="bottom text-center">
+                                    New here ? <a href="#"><b>Join Us</b></a>
+                                </div>
+                         </div>
+                    </li>
+                </ul>
+            </li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~REPORTING A PLAYED GAME~~~~~~~~~~~~~~~ -->
+
+    <div class="modal fade" id="submitGame" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="exampleModalLabel">Submit a Match</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="newGame" class="form-horizontal">
+                        <div class="form-group">
+                            <label for="winnerName"  class="col-sm-2 control-label"> Winner: </label>
+                            <div class="col-sm-4">
+                                <input type="name_Winner" class="form-control" id="winnerName" placeholder="Winner's Name">
+                            </div>
+                            <label for="loserName"  class="control-label col-sm-2"> Loser: </label>
+                            <div class="col-sm-4">
+                                <input type="name_Loser" class="form-control" id="loserName" placeholder="Loser's Name">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="scoreW"  class="col-sm-2 control-label"> Points: </label>
+                            <div class="col-sm-4">
+                                <input type="score_Winner" class="form-control" id="scoreW" placeholder="Winner's Points">
+                            </div>
+                            <label for="loserName"  class="control-label col-sm-2"> Points: </label>
+                            <div class="col-sm-4">
+                                <input type="score_Loser" class="form-control" id="scoreL" placeholder="Loser's Points">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <span class="input-group-btn">
+                        <input type="submit" class="btn btn-primary" value="Submit Match" id="submitData" data-dismiss="modal">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" >Close</button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+  
+  <!-- ~~~~~~~~~~~~~~~login~~~~~~~~~~~~~~~~~~~~~~~~-->
+    <form class="login-form">
+        <h2>Log In</h2>
+        <div class="error" style="display:none"></div>
+        <input type="text" id="login-username" placeholder="Username" />
+        <input type="password" id="login-password" placeholder="Password" />
+        <button>Log In</button>
+    </form>
+    <form class="signup-form">
+        <h2>Sign Up</h2>
+        <div class="error" style="display:none"></div>
+        <input type="text" id="signup-username" placeholder="Username" />
+        <input type="password" id="signup-password" placeholder="Create a Password" />
+        <button>Sign Up</button>
+    </form>
+
+  
+  
+    <script src="js/bootstrap.min.js"></script>
+</body>
+
+</html>

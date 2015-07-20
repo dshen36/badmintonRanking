@@ -5,30 +5,57 @@ $(document).ready(function() {
 		e.preventDefault();
 		submitGame();
 	})
+	$('#navBarSignIn').on('click', function(e) {
+ 
+    // Prevent Default Submit Event
+	    e.preventDefault();
+	 
+	    // Get data from the form and put them into variables
+	    // var data = $(this).serializeArray(),
+	    //     username = data[0].value,
+	    //     password = data[1].value;
+	    var username = $("#navBarUsername").val();
+	    var password = $("#navBarPassword").val();
+	 
+	    // Call Parse Login function with those variables
+	    Parse.User.logIn(username, password, {
+	        // If the username and password matches
+	        success: function(user) {
+	        	console.log("USER HAS LOGGED IN");
+	            alert('Welcome!');
+	        },
+	        // If there is an error
+	        error: function(user, error) {
+	            console.log(error);
+	        }
+	    });
+	 
+	})
 });
 
-Parse.User.signUp(username, password, { ACL: new Parse.ACL() }, {
-  	success: function(user) {
-	    new ManageTodosView();
-	    self.undelegateEvents();
-	    delete self;
-  	},
-  	error: function(user, error) {
-    	self.$(".signup-form .error").html(error.message).show();
-    	this.$(".signup-form button").removeAttr("disabled");
-  	}
-});
-Parse.User.logIn(username, password, {
-  	success: function(user) {
-  	    new ManageTodosView();
-  	    self.undelegateEvents();
-  	    delete self;
-  	},
-  	error: function(user, error) {
-    	self.$(".login-form .error").html("Invalid username or password. Please try again.").show();
-    	this.$(".login-form button").removeAttr("disabled");
-  	}
-});
+// Parse.User.signUp(username, password, { ACL: new Parse.ACL() }, {
+//   	success: function(user) {
+// 	    new ManageTodosView();
+// 	    self.undelegateEvents();
+// 	    delete self;
+//   	},
+//   	error: function(user, error) {
+//     	self.$(".signup-form .error").html(error.message).show();
+//     	this.$(".signup-form button").removeAttr("disabled");
+//   	}
+// });
+// Parse.User.logIn(username, password, {
+//   	success: function(user) {
+//   	    new ManageTodosView();
+//   	    self.undelegateEvents();
+//   	    delete self;
+//   	},
+//   	error: function(user, error) {
+//     	self.$(".login-form .error").html("Invalid username or password. Please try again.").show();
+//     	this.$(".login-form button").removeAttr("disabled");
+//   	}
+// });
+
 
 function submitGame() {
 	var Game = Parse.Object.extend("Game");

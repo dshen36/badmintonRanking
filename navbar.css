@@ -1,8 +1,10 @@
 body{
-    
+    background-size: 100% 100%;
     padding:50px;
-    background: url(badminton3.jpg)
-
+    background: url(badminton3.jpg);
+    background-position: right bottom;
+    background-repeat: no-repeat;
+    height: 100%;
 }
 
 #login-dp{
@@ -32,6 +34,9 @@ body{
 .btn-fb{
     color: #fff;
     background-color:#3b5998;
+}
+#or {
+    padding-bottom: 0.75em;
 }
 .btn-fb:hover{
     color: #fff;

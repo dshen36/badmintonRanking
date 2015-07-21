@@ -1,5 +1,5 @@
 Parse.initialize("LZns8tKGpiFr6f1NbgHatFoOAQ8KBm2m8X8SoEZF", "QGkhPTDc3qLV3mVNgisg7gAqGzbciuXhBTnnyYjy");
-
+var loggedInUser = "";
 $(document).ready(function() {
     $('#submitData').on('click', function (e) {
 		e.preventDefault();
@@ -14,6 +14,9 @@ $(document).ready(function() {
     // Prevent Default Submit Event
 	    e.preventDefault();
 		logIn();
+		console.log(loggedInUser);
+		document.getElementById('welcomeUser').innerHTML = 'Welcome ' + loggedInUser + '!';
+		document.write('Welcome ' + loggedInUser + '!');
 	})
 	$('#logOut').on('click', function(e) {
     // Prevent Default Submit Event
@@ -24,6 +27,7 @@ $(document).ready(function() {
 function logOut () {
 	Parse.User.logOut();
 	alert("you have logged out!");
+	window.location.replace("index.html");
 }
 function handleParseError(err) {
   switch (err.code) {
@@ -86,8 +90,13 @@ function logIn() {
         	//new ManageTodosView();
 			//self.undelegateEvents();
 			//delete self;
+			loggedInUser = username;
         	console.log("USER HAS LOGGED IN");
             alert('Welcome!');
+            
+            window.location.replace("loggedIn.html");//http://stackoverflow.com
+            console.log("user: "+loggedInUser);
+            console.log(username);
         },
         // If there is an error
         error: function(user, error) {

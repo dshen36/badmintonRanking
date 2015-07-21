@@ -36,6 +36,7 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
             <li class="active " style="text-align:center;" ><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#submitGame" style="margin-top:7px;"> Report Match </button></li>
+            <!-- <li class="active " style="text-align:center;" ><button type="button" class="btn btn-primary" data-toggle="modal" id="logOut" style="margin-top:7px;"> Log Out </button></li>  -->
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
@@ -56,13 +57,16 @@
             <button type="submit" class="btn btn-default">Submit</button>
           </form>
           <ul class="nav navbar-nav navbar-right">
-            <li><p class="navbar-text">Already have an Account?</p></li>
+            <li><p id="welcomeUser" class="navbar-text">Welcome!</p></li>
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></a>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Log Out</b> <span class="caret"></span></a>
                 <ul id="login-dp" class="dropdown-menu">
                     <li>
                         <div class="row">
-                            <button type="button" class="btn btn-primary" data-toggle="modal" id="logOut" style="margin-top:7px;"> Log Out </button>    
+                            <div class="col-md-12">
+                                <button type="button" class="btn btn-primary btn-block" data-toggle="modal" id="logOut" style="margin-top:7px;"> Log Out </button>
+                            </div>
                         </div>
                     </li>
                 </ul>
@@ -168,7 +172,7 @@
     </div>
   
   <!-- ~~~~~~~~~~~~~~~login~~~~~~~~~~~~~~~~~~~~~~~~-->
-    <form class="login-form">
+<!--     <form class="login-form">
         <h2>Log In</h2>
         <div class="error" style="display:none"></div>
         <input type="text" id="login-username" placeholder="Username" />
@@ -181,7 +185,7 @@
         <input type="text" id="signup-username" placeholder="Username" />
         <input type="password" id="signup-password" placeholder="Create a Password" />
         <button>Sign Up</button>
-    </form>
+    </form> -->
 
   
   

@@ -15,7 +15,16 @@ $(document).ready(function() {
 	    e.preventDefault();
 		logIn();
 	})
+	$('#logOut').on('click', function(e) {
+    // Prevent Default Submit Event
+	    e.preventDefault();
+		logOut();
+	})
 });
+function logOut () {
+	Parse.User.logOut();
+	alert("you have logged out!");
+}
 function handleParseError(err) {
   switch (err.code) {
     case Parse.Error.INVALID_SESSION_TOKEN:

@@ -5,33 +5,92 @@ $(document).ready(function() {
 		e.preventDefault();
 		submitGame();
 	})
-	$('#navBarSignIn').on('click', function(e) {
- 
+	$('#createUser').on('click', function(e) {
     // Prevent Default Submit Event
 	    e.preventDefault();
-	 
-	    // Get data from the form and put them into variables
-	    // var data = $(this).serializeArray(),
-	    //     username = data[0].value,
-	    //     password = data[1].value;
-	    var username = $("#navBarUsername").val();
-	    var password = $("#navBarPassword").val();
-	 
-	    // Call Parse Login function with those variables
-	    Parse.User.logIn(username, password, {
-	        // If the username and password matches
-	        success: function(user) {
-	        	console.log("USER HAS LOGGED IN");
-	            alert('Welcome!');
-	        },
-	        // If there is an error
-	        error: function(user, error) {
-	            console.log(error);
-	        }
-	    });
-	 
+		signUp();
+	})
+	$('#navBarSignIn').on('click', function(e) {
+    // Prevent Default Submit Event
+	    e.preventDefault();
+		logIn();
 	})
 });
+function handleParseError(err) {
+  switch (err.code) {
+    case Parse.Error.INVALID_SESSION_TOKEN:
+      Parse.User.logOut();
+      // If web browser, render a log in screen
+      // If Express.js, redirect the user to the log in route
+      break;
+
+    // Other Parse API errors that you want to explicitly handle
+  }
+}
+function signUp() {
+	var user = new Parse.User();
+	//var form = document.getElementById("signup-form");
+
+	var name = $("#signUpName").val();
+	var school = $("#signUpSchool").val();
+	var email = $("#signUpEmail").val();
+	var username = $("#signUpUsername").val();	
+	var password = $("#signUpPassword").val();
+	var confPassword = $("#confirmPassword").val();
+
+	if (password === confPassword) {//no .equals?
+		user.set("name", name);
+		user.set("school", school);
+		user.set("email", email);
+		user.set("username", username);
+		user.set("password", password);
+	} else {
+		//throw new error
+		alert("Passwords do not match! Please try again.")
+	}
+	user.signUp(null, {
+		success: function(user) {
+		    // Hooray! Let them use the app now.
+		    // form.submit();
+		    alert("Thank you for signing up. We'll keep you updated!");
+		},
+		error: function(user, error) {
+			handleParseError(error);
+		    // Show the error message somewhere and let the user try again.
+			alert("Error: " + error.code + " " + error.message);
+		}
+	});
+
+}
+function logIn() {
+	    // Get data from the form and put them into variables
+    // var data = $(this).serializeArray(),
+    //     username = data[0].value,
+    //     password = data[1].value;
+    var username = $("#navBarUsername").val();
+    var password = $("#navBarPassword").val();
+ 
+    // Call Parse Login function with those variables
+    Parse.User.logIn(username, password, {
+        // If the username and password matches
+        success: function(user) {
+        	//new ManageTodosView();
+			//self.undelegateEvents();
+			//delete self;
+        	console.log("USER HAS LOGGED IN");
+            alert('Welcome!');
+        },
+        // If there is an error
+        error: function(user, error) {
+        	handleParseError(error);
+        	//self.$(".login-form .error").html("Invalid username or password. Please try again.").show();
+        	//this.$(".login-form button").removeAttr("disabled");
+        	alert('This email/password is not correct. Please try again.');
+            console.log(error);
+        }
+    });
+}
+
 
 // Parse.User.signUp(username, password, { ACL: new Parse.ACL() }, {
 //   	success: function(user) {
@@ -44,18 +103,6 @@ $(document).ready(function() {
 //     	this.$(".signup-form button").removeAttr("disabled");
 //   	}
 // });
-// Parse.User.logIn(username, password, {
-//   	success: function(user) {
-//   	    new ManageTodosView();
-//   	    self.undelegateEvents();
-//   	    delete self;
-//   	},
-//   	error: function(user, error) {
-//     	self.$(".login-form .error").html("Invalid username or password. Please try again.").show();
-//     	this.$(".login-form button").removeAttr("disabled");
-//   	}
-// });
-
 
 function submitGame() {
 	var Game = Parse.Object.extend("Game");
@@ -81,7 +128,9 @@ function submitGame() {
 			//closeModal();
 		},
 		error: function(match,error) {
+			
 			console.log(error.message);
+			alert('there was an issue with this record');
 		}
 	});
 }

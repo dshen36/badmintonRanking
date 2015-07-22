@@ -1,32 +1,28 @@
 Parse.initialize("LZns8tKGpiFr6f1NbgHatFoOAQ8KBm2m8X8SoEZF", "QGkhPTDc3qLV3mVNgisg7gAqGzbciuXhBTnnyYjy");
-var loggedInUser = "";
+
 $(document).ready(function() {
+	
     $('#submitData').on('click', function (e) {
 		e.preventDefault();
 		submitGame();
 	})
 	$('#createUser').on('click', function(e) {
-    // Prevent Default Submit Event
 	    e.preventDefault();
 		signUp();
 	})
 	$('#navBarSignIn').on('click', function(e) {
-    // Prevent Default Submit Event
 	    e.preventDefault();
 		logIn();
-		console.log(loggedInUser);
-		document.getElementById('welcomeUser').innerHTML = 'Welcome ' + loggedInUser + '!';
-		document.write('Welcome ' + loggedInUser + '!');
+		console.log(window.loggedInUser);
 	})
 	$('#logOut').on('click', function(e) {
-    // Prevent Default Submit Event
 	    e.preventDefault();
+	    alert('pce ' + getCurrentUser() + '!');
 		logOut();
 	})
 });
 function logOut () {
 	Parse.User.logOut();
-	alert("you have logged out!");
 	window.location.replace("index.html");
 }
 function handleParseError(err) {
@@ -36,14 +32,11 @@ function handleParseError(err) {
       // If web browser, render a log in screen
       // If Express.js, redirect the user to the log in route
       break;
-
     // Other Parse API errors that you want to explicitly handle
   }
 }
 function signUp() {
 	var user = new Parse.User();
-	//var form = document.getElementById("signup-form");
-
 	var name = $("#signUpName").val();
 	var school = $("#signUpSchool").val();
 	var email = $("#signUpEmail").val();
@@ -63,40 +56,49 @@ function signUp() {
 	}
 	user.signUp(null, {
 		success: function(user) {
-		    // Hooray! Let them use the app now.
-		    // form.submit();
 		    alert("Thank you for signing up. We'll keep you updated!");
 		},
 		error: function(user, error) {
 			handleParseError(error);
-		    // Show the error message somewhere and let the user try again.
 			alert("Error: " + error.code + " " + error.message);
 		}
 	});
 
 }
+function setCurrentUser(username) {
+	window.loggedInUser = username;
+	sessionStorage.setItem("user",username);
+}
+function getCurrentUser() {
+	return sessionStorage.getItem("user");
+}
 function logIn() {
-	    // Get data from the form and put them into variables
-    // var data = $(this).serializeArray(),
-    //     username = data[0].value,
-    //     password = data[1].value;
     var username = $("#navBarUsername").val();
     var password = $("#navBarPassword").val();
+
+    var query = new Parse.Query(Parse.User);
+	query.equalTo("username", username);  
+	query.find({
+	  success: function(user) {
+	    for (var i = 0; i < user.length; i++) {
+	      var object = user[i];
+	      setCurrentUser(username);
+	  	}
+	  }, 
+	  error: function(user,error) {
+	  	console.log("user not found");
+	  }
+	});
  
-    // Call Parse Login function with those variables
     Parse.User.logIn(username, password, {
-        // If the username and password matches
         success: function(user) {
         	//new ManageTodosView();
 			//self.undelegateEvents();
 			//delete self;
-			loggedInUser = username;
-        	console.log("USER HAS LOGGED IN");
+			setCurrentUser(username);
             alert('Welcome!');
-            
             window.location.replace("loggedIn.html");//http://stackoverflow.com
-            console.log("user: "+loggedInUser);
-            console.log(username);
+
         },
         // If there is an error
         error: function(user, error) {

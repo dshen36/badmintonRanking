@@ -12,8 +12,10 @@ $(document).ready(function() {
 	})
 	$('#navBarSignIn').on('click', function(e) {
 	    e.preventDefault();
-		logIn();
-		console.log(window.loggedInUser);
+	    var username = $("#navBarUsername").val();
+    	var password = $("#navBarPassword").val();
+		logIn(username,password);
+		// console.log(window.loggedInUser);
 	})
 	$('#logOut').on('click', function(e) {
 	    e.preventDefault();
@@ -56,7 +58,9 @@ function signUp() {
 	}
 	user.signUp(null, {
 		success: function(user) {
+			//setCurrentUser(user);
 		    alert("Thank you for signing up. We'll keep you updated!");
+		    logIn(username,password);
 		},
 		error: function(user, error) {
 			handleParseError(error);
@@ -72,9 +76,9 @@ function setCurrentUser(username) {
 function getCurrentUser() {
 	return sessionStorage.getItem("user");
 }
-function logIn() {
-    var username = $("#navBarUsername").val();
-    var password = $("#navBarPassword").val();
+
+function logIn(username,password) {
+    
 
     var query = new Parse.Query(Parse.User);
 	query.equalTo("username", username);  
@@ -82,7 +86,7 @@ function logIn() {
 	  success: function(user) {
 	    for (var i = 0; i < user.length; i++) {
 	      var object = user[i];
-	      setCurrentUser(username);
+	      // setCurrentUser(username);
 	  	}
 	  }, 
 	  error: function(user,error) {
@@ -110,6 +114,45 @@ function logIn() {
         }
     });
 }
+
+// function logIn() {
+//     var username = $("#navBarUsername").val();
+//     var password = $("#navBarPassword").val();
+
+//     var query = new Parse.Query(Parse.User);
+// 	query.equalTo("username", username);  
+// 	query.find({
+// 	  success: function(user) {
+// 	    for (var i = 0; i < user.length; i++) {
+// 	      var object = user[i];
+// 	      // setCurrentUser(username);
+// 	  	}
+// 	  }, 
+// 	  error: function(user,error) {
+// 	  	console.log("user not found");
+// 	  }
+// 	});
+ 
+//     Parse.User.logIn(username, password, {
+//         success: function(user) {
+//         	//new ManageTodosView();
+// 			//self.undelegateEvents();
+// 			//delete self;
+// 			setCurrentUser(username);
+//             alert('Welcome!');
+//             window.location.replace("loggedIn.html");//http://stackoverflow.com
+
+//         },
+//         // If there is an error
+//         error: function(user, error) {
+//         	handleParseError(error);
+//         	//self.$(".login-form .error").html("Invalid username or password. Please try again.").show();
+//         	//this.$(".login-form button").removeAttr("disabled");
+//         	alert('This email/password is not correct. Please try again.');
+//             console.log(error);
+//         }
+//     });
+// }
 
 
 // Parse.User.signUp(username, password, { ACL: new Parse.ACL() }, {

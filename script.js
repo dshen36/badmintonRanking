@@ -132,39 +132,35 @@ function logIn(username,password) {
 //   	}
 // });
 
-//-----------------------------------------------------------
 
-//COME BACK OVER HERE
 
 function createGameForm() {//onclick of (Report Game)
 	var Player = Parse.Object.extend("User");
 	var query = new Parse.Query(Player);
-	query.find ({
+	query.find({
 		success: function(players) {
 			console.log(players.length);
-			for (var i = 0; i < players.length; i++) {//it regenerates the list every time it's reclicked.
-				var player = players[i];
-				if sessionStorage.getItem(String(player.get('name'))) !== String(player.get('name')) {
-					sessionStorage.setItem(String(player.get('name')),String(player.get('name')));
-					(function($) {//anyway that i can order this? (by alphabetical order?/ranking order?)
-						//need to do this
-						console.log(sessionStorage.getItem(String(player.get('name'))));
-						$('#winnerName').append($("<option></option>") //playerDropdown is the dropdown menu
-	     				.attr("value",String(sessionStorage.getItem(String(player.get('name'))))
-	     				.text(String(sessionStorage.getItem(String(player.get('name'))))); 
-	     				// .attr("value",player.get('name'))
-	     				// .text(player.get('name'))); 
-					})(jQuery);
-				}
-			} 
-			//sessionStorage.setItem("playerRoster","true"); //if you refresh the page, it won't work.
-			// maybe store the values in sessionStorage, that way it can be more dynamic and update if a person happens to sign up while you're logging in
-		},
-		error: function(error) {
-			alert("Error: " + error.code + " " + error.message);
-    	}
+			for (var i = 0; i < players.length; i++) { 
+  				var player = players[i];
+  				if(sessionStorage.getItem(String(player.get('name'))) !== String(player.get('name'))) {
+  					sessionStorage.setItem(String(player.get('name')),String(player.get('name')));
+		   		}
+		   		(function($) {
+	      			$('#winnerName').append($("<option></option>")
+			    	.attr("value",String(sessionStorage.getItem(String(player.get('name')))))
+			    	.text(String(sessionStorage.getItem(String(player.get('name')))))); 
+			    	$('#loserName').append($("<option></option>")
+			    	.attr("value",String(sessionStorage.getItem(String(player.get('name')))))
+			    	.text(String(sessionStorage.getItem(String(player.get('name')))))); 
+	      		})(jQuery);
+		   	}
+	    },
+	    error: function(error) {
+	    	alert("Error: " + error.code + " " + error.message);
+	    }
 	});
 }
+
 function submitGame() {
 	//creating a new instance of the game
 	var Game = Parse.Object.extend("Game");

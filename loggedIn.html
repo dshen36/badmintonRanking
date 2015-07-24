@@ -37,7 +37,7 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
-            <li class="active " style="text-align:center;" ><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#submitGame" style="margin-top:7px;"> Report Match </button></li>
+            <li class="active " style="text-align:center;" ><button type="button" id="reportMatch" class="btn btn-primary" data-toggle="modal" data-target="#submitGame" style="margin-top:7px;"> Report Match </button></li>
             <!-- <li class="active " style="text-align:center;" ><button type="button" class="btn btn-primary" data-toggle="modal" id="logOut" style="margin-top:7px;"> Log Out </button></li>  -->
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
@@ -97,7 +97,13 @@
                         <div class="form-group">
                             <label for="winnerName"  class="col-sm-2 control-label"> Winner: </label>
                             <div class="col-sm-4">
-                                <input type="name_Winner" class="form-control" id="winnerName" placeholder="Winner's Name">
+            <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+                                <select class="form-control" id="winnerName">   
+                                    <option value="" disabled selected>Select the Winner</option>
+                                   
+                                </select>
+                                <!-- <input type="name_Winner" class="form-control" id="winnerName" placeholder="Winner's Name"> -->
+            <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
                             </div>
                             <label for="loserName"  class="control-label col-sm-2"> Loser: </label>
                             <div class="col-sm-4">

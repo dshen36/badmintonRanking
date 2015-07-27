@@ -179,7 +179,7 @@ function submitGame() {
 	var queryLose = new Parse.Query(Player);
 
 	queryWin.equalTo("name",winner);
-	queryWin.equalTo("name",loser);
+	queryLose.equalTo("name",loser);
 
 	//console.log("player: " + winner);
 	queryWin.find().then(function(playersW) {
@@ -187,6 +187,8 @@ function submitGame() {
 		winnerID = playersW[0].id;
 		match.set("winnerID",winnerID);
 		return playersW[0].id;
+	}).then(function() {
+		return queryLose.find();
 	}).then(function(playersL) {
 		console.log("player id: " + playersL[0].id);
 		loserID = playersL[0].id;

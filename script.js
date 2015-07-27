@@ -187,31 +187,38 @@ function submitGame() {
 
 
 }
-
 function findUserAttr(given,givenAttr,desiredAttr) {
 	var Player = Parse.Object.extend("User");
 	var query = new Parse.Query(Player);//Player
 	query.equalTo(givenAttr,given);
-	query.find({
-		success: function(players) {
-			console.log(players.length);
-			for (var i = 0; i < players.length; i++) { 
-  				var player = players[i];//assumably only 1
-  				//console.log("player: " + player.get('school'));
-  				if (desiredAttr === 'objectId') {
-						var desired = player.id;
-  					console.log(desired);
-  				} else {
-  					var desired = String(player.get(desiredAttr));
-  				}
-  				//console.log("The desired value is: " + desired);
-  			}
-			return desired;
-		},
-		error: function (error) {
-			alert("Error: " + error.code + " " + error.message);
-		}
+	console.log("player: " + given);
+	query.find().then(function(players) {
+		console.log("player id: " + players[0].id);
+		return players[0].id;
+	}, function(error) {
+		alert("Error: " + error.code + " " + error.message);
 	});
+	// query.find({
+
+	// 	success: function(players) {
+	// 		console.log("entered success");
+	// 		console.log(players.length);
+	// 		for (var i = 0; i < players.length; i++) { 
+ //  				var player = players[i];//assumably only 1
+ //  				if (desiredAttr === 'objectId') {
+	// 					var desired = player.id;
+ //  					console.log(desired);
+ //  				} else {
+ //  					var desired = String(player.get(desiredAttr));
+ //  				}
+ //  			}
+	// 		return desired;
+	// 	},
+	// 	error: function (error) {
+	// 		console.log("entered error");
+			
+	// 	}
+	// });
 }
 
 // function desiredCredentials(desired,desiredAttr) { //for search bar

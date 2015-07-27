@@ -173,17 +173,44 @@ function submitGame() {
 	match.set("winnerScore",winner_Score);
 	match.set("loserScore",loser_Score);
 	//getting the userfrom the database
-	winnerID = findUserAttr(winner,'name','objectId').then(function() {
-		loserID = findUserAttr(loser,'name','objectId');
-		return findUserAttr(loser,'name','objectId');
+
+	var Player = Parse.Object.extend("User");
+	var queryWin = new Parse.Query(Player);//Player
+	var queryLose = new Parse.Query(Player);
+
+	queryWin.equalTo("name",winner);
+	queryWin.equalTo("name",loser);
+
+	//console.log("player: " + winner);
+	queryWin.find().then(function(playersW) {
+		console.log("player id: " + playersW[0].id);
+		winnerID = playersW[0].id;
+		match.set("winnerID",winnerID);
+		return playersW[0].id;
+	}).then(function(playersL) {
+		console.log("player id: " + playersL[0].id);
+		loserID = playersL[0].id;
+		match.set("loserID",loserID);//not setting the loserID
+		return playersL[0].id;
 	}).then(function() {
 		return match.save(null);
 	}).then(function(match) {
-		alert('new match recorded with an id of: ' +match.id);
+		alert('new match recorded with an id of: ' + match.id);
 	}, function(error) {
-		console.log(error.message);
-		alert('there was an issue with this record');
+		alert("Error: " + error.code + " " + error.message);
 	});
+
+	// winnerID = findUserAttr(winner,'name','objectId').then(function() {
+	// 	loserID = findUserAttr(loser,'name','objectId');
+	// 	return findUserAttr(loser,'name','objectId');
+	// }).then(function() {
+	// 	return match.save(null);
+	// }).then(function(match) {
+	// 	alert('new match recorded with an id of: ' +match.id);
+	// }, function(error) {
+	// 	console.log(error.message);
+	// 	alert('there was an issue with this record');
+	// });
 
 
 }

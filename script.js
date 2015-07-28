@@ -208,16 +208,38 @@ function submitGame() {
 
 function searchUserHistory() {
 	var searchVal = $("#searchInput").val();
-	var searchID = findUserAttr("name",searchVal);
+	var searchID = ""; // = findUserAttr("name",searchVal);
 	//var loserIdInput;
 
 	var matchHistory = Parse.Object.extend("Game");
 	var queryWon = new Parse.Query(matchHistory);
 	var queryLost = new Parse.Query(matchHistory);
-	queryWon.equalTo("winnerID",searchID);
-	queryLost.equalTo("loserID",searchID);
+	// queryWon.equalTo("winnerID",searchID);
+	// queryLost.equalTo("loserID",searchID);
 
-	queryWon.find().then(function(playersW) {
+	var Player = Parse.Object.extend("User");
+	var queryID = new Parse.Query(Player);//Player
+	queryID.equalTo("name",searchVal);
+
+	var DNE = false;
+
+	queryID.find().then(function(player) {
+		if (typeof player[0] === 'undefined') {
+			alert("Error: " + searchVal +" does not exist. Instead, I'm going to show all past games");
+			DNE = true;
+			return;
+		} else {
+			console.log("player id: " + player[0].id);
+			searchID = player[0].id;
+			queryWon.equalTo("winnerID",searchID);
+			queryLost.equalTo("loserID",searchID);
+			return player[0].id;
+		}
+	}, function(error) {
+		alert("Error: "+ searchVal +" does not exist or has not played any matches yet");
+	}).then(function() {
+		return queryWon.find();
+	}).then(function(playersW) {
 		for (var i = 0; i < playersW.length; i++) {
 			console.log("Winner player id #" + i + ": " + playersW[i].id);
 		}
@@ -225,10 +247,12 @@ function searchUserHistory() {
 	}).then(function() {
 		return queryLost.find();
 	}).then(function(playersL) {
-		for (var i = 0; i < playersL.length; i++) {
-			console.log("Loser player id #" + i + ": " + playersL[i].id);
-		}
-		return playersL;
+		if (!DNE) {
+			for (var i = 0; i < playersL.length; i++) {
+				console.log("Loser player id #" + i + ": " + playersL[i].id);
+			}
+			return playersL;
+		} return null;
 	}); //TO DO, try normal way, then try promises. 
 }
 

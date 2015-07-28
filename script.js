@@ -25,6 +25,7 @@ $(document).ready(function() {
 		logOut();
 	})
 });
+
 function logOut () {
 	Parse.User.logOut();
 	window.location.replace("index.html");
@@ -82,14 +83,14 @@ function logIn(username,password) {
     var query = new Parse.Query(Parse.User);
 	query.equalTo("username", username);  
 	query.find({
-	  success: function(user) {
-	    for (var i = 0; i < user.length; i++) {
-	      var object = user[i];
-	  	}
-	  }, 
-	  error: function(user,error) {
-	  	console.log("user not found");
-	  }
+		success: function(user) {
+			for (var i = 0; i < user.length; i++) {
+			  	var object = user[i];
+		    }
+		}, 
+		error: function(user,error) {
+			console.log("user not found");
+		}
 	});
  
     Parse.User.logIn(username, password, {
@@ -172,16 +173,15 @@ function submitGame() {
 	match.set("winner",winner);
 	match.set("winnerScore",winner_Score);
 	match.set("loserScore",loser_Score);
+	
 	//getting the userfrom the database
-
 	var Player = Parse.Object.extend("User");
-	var queryWin = new Parse.Query(Player);//Player
+	var queryWin = new Parse.Query(Player);
 	var queryLose = new Parse.Query(Player);
 
 	queryWin.equalTo("name",winner);
 	queryLose.equalTo("name",loser);
 
-	//console.log("player: " + winner);
 	queryWin.find().then(function(playersW) {
 		console.log("player id: " + playersW[0].id);
 		winnerID = playersW[0].id;
@@ -192,7 +192,7 @@ function submitGame() {
 	}).then(function(playersL) {
 		console.log("player id: " + playersL[0].id);
 		loserID = playersL[0].id;
-		match.set("loserID",loserID);//not setting the loserID
+		match.set("loserID",loserID);
 		return playersL[0].id;
 	}).then(function() {
 		return match.save(null);
@@ -201,20 +201,6 @@ function submitGame() {
 	}, function(error) {
 		alert("Error: " + error.code + " " + error.message);
 	});
-
-	// winnerID = findUserAttr(winner,'name','objectId').then(function() {
-	// 	loserID = findUserAttr(loser,'name','objectId');
-	// 	return findUserAttr(loser,'name','objectId');
-	// }).then(function() {
-	// 	return match.save(null);
-	// }).then(function(match) {
-	// 	alert('new match recorded with an id of: ' +match.id);
-	// }, function(error) {
-	// 	console.log(error.message);
-	// 	alert('there was an issue with this record');
-	// });
-
-
 }
 function findUserAttr(given,givenAttr,desiredAttr) {
 	var Player = Parse.Object.extend("User");
@@ -227,27 +213,6 @@ function findUserAttr(given,givenAttr,desiredAttr) {
 	}, function(error) {
 		alert("Error: " + error.code + " " + error.message);
 	});
-	// query.find({
-
-	// 	success: function(players) {
-	// 		console.log("entered success");
-	// 		console.log(players.length);
-	// 		for (var i = 0; i < players.length; i++) { 
- //  				var player = players[i];//assumably only 1
- //  				if (desiredAttr === 'objectId') {
-	// 					var desired = player.id;
- //  					console.log(desired);
- //  				} else {
- //  					var desired = String(player.get(desiredAttr));
- //  				}
- //  			}
-	// 		return desired;
-	// 	},
-	// 	error: function (error) {
-	// 		console.log("entered error");
-			
-	// 	}
-	// });
 }
 
 // function desiredCredentials(desired,desiredAttr) { //for search bar
@@ -264,7 +229,6 @@ function findUserAttr(given,givenAttr,desiredAttr) {
 // 	});
 // }
 
-
 // Parse.User.signUp(username, password, { ACL: new Parse.ACL() }, {
 //   	success: function(user) {
 // 	    new ManageTodosView();
@@ -276,7 +240,6 @@ function findUserAttr(given,givenAttr,desiredAttr) {
 //     	this.$(".signup-form button").removeAttr("disabled");
 //   	}
 // });
-
 
 // function findUserAttr(given,givenAttr,desiredAttr) {
 // 	var Player = Parse.Object.extend("User");
@@ -303,52 +266,4 @@ function findUserAttr(given,givenAttr,desiredAttr) {
 // 			alert("Error: " + error.code + " " + error.message);
 // 		}
 // 	});
-// }
-
-// function submitGame() {
-// 	//creating a new instance of the game
-// 	var Game = Parse.Object.extend("Game");
-// 	var match = new Game();
-
-// 	//retrieving the values of from the form
-// 	var winner = $("#winnerName").val();
-// 	var loser = $("#loserName").val();
-// 	var winner_Score = parseInt($("#scoreW").val());
-// 	var loser_Score = parseInt($("#scoreL").val());
-// 	var winnerID = "";
-// 	var loserID = "";
-
-// 	// match.set("loser",loser);
-// 	// match.set("winner",winner);
-// 	// match.set("winnerScore",winner_Score);
-// 	// match.set("loserScore",loser_Score);
-// 	//getting the userfrom the database
-// 	winnerID = findUserAttr(winner,'name','objectId').then(function() {
-// 		loserID = findUserAttr(loser,'name','objectId').then(function() {
-// 			//console.log(winnerID);
-
-// 			//setting the statistics of the game
-// 			// match.set("loser",loser);
-// 			// match.set("winner",winner);
-// 			// match.set("winnerScore",winner_Score);
-// 			// match.set("loserScore",loser_Score);
-
-// 			//actually saving the game or throwing an error
-// 			match.save(null, {
-// 				success: function(match) {
-// 					console.log(winner);
-// 					alert('new match recorded with an id of: ' +match.id);
-// 					console.log("game recorded!");
-// 					//closeModal();
-// 				},
-// 				error: function(match,error) {
-					
-// 					console.log(error.message);
-// 					alert('there was an issue with this record');
-// 				}
-// 			});
-// 		});
-// 		return loserID;
-// 	});
-// 	return winnerID;
 // }

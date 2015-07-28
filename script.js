@@ -1,6 +1,10 @@
 Parse.initialize("LZns8tKGpiFr6f1NbgHatFoOAQ8KBm2m8X8SoEZF", "QGkhPTDc3qLV3mVNgisg7gAqGzbciuXhBTnnyYjy");
 
 $(document).ready(function() {
+	$('#searchButton').on('click',function (e) {
+		e.preventDefault();
+		searchUserHistory();
+	})
 	$('#reportMatch').on('click',function (e) {
 		e.preventDefault();
 		createGameForm();
@@ -92,7 +96,6 @@ function logIn(username,password) {
 			console.log("user not found");
 		}
 	});
- 
     Parse.User.logIn(username, password, {
         success: function(user) {
         	//new ManageTodosView();
@@ -202,13 +205,40 @@ function submitGame() {
 		alert("Error: " + error.code + " " + error.message);
 	});
 }
-function findUserAttr(given,givenAttr,desiredAttr) {
+
+function searchUserHistory() {
+	var searchVal = $("#searchInput").val();
+	var searchID = findUserAttr("name",searchVal);
+	//var loserIdInput;
+
+	var matchHistory = Parse.Object.extend("Game");
+	var queryWon = new Parse.Query(matchHistory);
+	var queryLost = new Parse.Query(matchHistory);
+	queryWon.equalTo("winnerID",searchID);
+	queryLost.equalTo("loserID",searchID);
+
+	queryWon.find().then(function(playersW) {
+		for (var i = 0; i < playersW.length; i++) {
+			console.log("Winner player id #" + i + ": " + playersW[i].id);
+		}
+		return playersW;
+	}).then(function() {
+		return queryLost.find();
+	}).then(function(playersL) {
+		for (var i = 0; i < playersL.length; i++) {
+			console.log("Loser player id #" + i + ": " + playersL[i].id);
+		}
+		return playersL;
+	}); //TO DO, try normal way, then try promises. 
+}
+
+function findUserAttr(given,givenAttr) {
 	var Player = Parse.Object.extend("User");
 	var query = new Parse.Query(Player);//Player
 	query.equalTo(givenAttr,given);
 	console.log("player: " + given);
 	query.find().then(function(players) {
-		console.log("player id: " + players[0].id);
+		//console.log("player id: " + players[0].id);
 		return players[0].id;
 	}, function(error) {
 		alert("Error: " + error.code + " " + error.message);
@@ -265,5 +295,18 @@ function findUserAttr(given,givenAttr,desiredAttr) {
 // 		error: function (error) {
 // 			alert("Error: " + error.code + " " + error.message);
 // 		}
+// 	});
+// }
+
+// function findUserAttr(given,givenAttr,desiredAttr) {
+// 	var Player = Parse.Object.extend("User");
+// 	var query = new Parse.Query(Player);//Player
+// 	query.equalTo(givenAttr,given);
+// 	console.log("player: " + given);
+// 	query.find().then(function(players) {
+// 		console.log("player id: " + players[0].id);
+// 		return players[0].id;
+// 	}, function(error) {
+// 		alert("Error: " + error.code + " " + error.message);
 // 	});
 // }

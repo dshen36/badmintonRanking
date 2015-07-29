@@ -223,6 +223,11 @@ function searchUserHistory() {
 
 	var DNE = false;
 
+	// var query1And2 = Parse.Query.or(query1, query2); ***********
+	// userQuery.descending("createdAt"); //descending? ascending?
+	// var query1And2 = Parse.Query.or(query1, query2);
+	// var sortedMerge = query1And2.descending("createdAt");
+
 	queryID.find().then(function(player) {
 		if (typeof player[0] === 'undefined') {
 			alert("Error: " + searchVal +" does not exist. Instead, I'm going to show all past games");

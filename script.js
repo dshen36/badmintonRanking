@@ -208,25 +208,19 @@ function submitGame() {
 
 function searchUserHistory() {
 	var searchVal = $("#searchInput").val();
-	var searchID = ""; // = findUserAttr("name",searchVal);
-	//var loserIdInput;
+	var searchID = "";
 
 	var matchHistory = Parse.Object.extend("Game");
 	var queryWon = new Parse.Query(matchHistory);
 	var queryLost = new Parse.Query(matchHistory);
-	// queryWon.equalTo("winnerID",searchID);
-	// queryLost.equalTo("loserID",searchID);
 
 	var Player = Parse.Object.extend("User");
 	var queryID = new Parse.Query(Player);//Player
 	queryID.equalTo("name",searchVal);
 
-	var DNE = false;
-
-	// var query1And2 = Parse.Query.or(query1, query2); ***********
-	// userQuery.descending("createdAt"); //descending? ascending?
-	// var query1And2 = Parse.Query.or(query1, query2);
-	// var sortedMerge = query1And2.descending("createdAt");
+	var DNE = false; //need to implement this
+	var sortedMerge = "";
+	var bothWinLose = "";
 
 	queryID.find().then(function(player) {
 		if (typeof player[0] === 'undefined') {
@@ -238,27 +232,26 @@ function searchUserHistory() {
 			searchID = player[0].id;
 			queryWon.equalTo("winnerID",searchID);
 			queryLost.equalTo("loserID",searchID);
+			bothWinLose = Parse.Query.or(queryWon, queryLost);
 			return player[0].id;
 		}
 	}, function(error) {
 		alert("Error: "+ searchVal +" does not exist or has not played any matches yet");
 	}).then(function() {
-		return queryWon.find();
-	}).then(function(playersW) {
-		for (var i = 0; i < playersW.length; i++) {
-			console.log("Winner player id #" + i + ": " + playersW[i].id);
-		}
-		return playersW;
-	}).then(function() {
-		return queryLost.find();
-	}).then(function(playersL) {
-		if (!DNE) {
-			for (var i = 0; i < playersL.length; i++) {
-				console.log("Loser player id #" + i + ": " + playersL[i].id);
+		return bothWinLose.find();
+	}).then(function(gameBoth) {
+		var verdict = "";
+		for (var i = 0; i < gameBoth.length; i++) {
+			if (gameBoth[i].get("winnerID") === searchID) {
+				verdict = "Winner: ";
+			} else {
+				verdict = "Loser: ";
 			}
-			return playersL;
-		} return null;
-	}); //TO DO, try normal way, then try promises. 
+			console.log(verdict + "player with game id #" + i + ": " + gameBoth[i].id);
+		}
+		//return bothWinLose.descending("createdAt"); //need to implement descending sort
+		return gameBoth;
+	});
 }
 
 function findUserAttr(given,givenAttr) {

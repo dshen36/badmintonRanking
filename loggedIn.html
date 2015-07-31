@@ -37,7 +37,8 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
-            <li class="active " style="text-align:center;" ><button type="button" id="reportMatch" class="btn btn-primary" data-toggle="modal" data-target="#submitGame" style="margin-top:7px;"> Report Match </button></li>
+            <li class="active " style="text-align:center;" ><button type="button" id="reportMatch" class="btn btn-primary" data-toggle="modal" data-target="#submitGame" style="margin-top:7px; margin-left:3.5px; margin-right:3.5px;"> Report Match </button></li>
+            <li class="active " style="text-align:center;" ><button type="button" id="playMatch" class="btn btn-primary" data-toggle="modal" data-target="#createGame" style="margin-top:7px; margin-left:3.5px; margin-right:3.5px;"> Play Match </button></li>
             <!-- <li class="active " style="text-align:center;" ><button type="button" class="btn btn-primary" data-toggle="modal" id="logOut" style="margin-top:7px;"> Log Out </button></li>  -->
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
@@ -120,6 +121,56 @@
                             <label for="scoreL"  class="control-label col-sm-2"> Points: </label>
                             <div class="col-sm-4">
                                 <input type="score_Loser" class="form-control" id="scoreL" placeholder="Loser's Points">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <span class="input-group-btn">
+                        <input type="submit" class="btn btn-primary" value="Submit Match" id="submitData" data-dismiss="modal">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" >Close</button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~PLAYING A NEW GAME~~~~~~~~~~~~~~~ -->
+
+    <div class="modal fade" id="createGame" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="exampleModalLabel">Create a Match</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="createGame" class="form-horizontal">
+                        <div class="form-group">
+                            <label for="player1"  class="col-sm-2 control-label"> Player 1: </label>
+                            <div class="col-sm-4">
+            <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+                                <select class="form-control" id="player1">   
+                                    <option value="" disabled selected>Select a player</option>
+                                </select>
+                                <!-- <input type="name_Winner" class="form-control" id="winnerName" placeholder="Winner's Name"> -->
+            <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+                            </div>
+                            <label for="player2"  class="control-label col-sm-2"> Player 2: </label>
+                            <div class="col-sm-4">
+                                <select class="form-control" id="player2">   
+                                    <option value="" disabled selected>Select a player</option>
+                                </select>
+                                <!-- <input type="name_Loser" class="form-control" id="loserName" placeholder="Loser's Name"> -->
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="maxPoints"  class="col-sm-2 control-label"> Game of how many points? </label>
+                            <div class="col-sm-4">
+                                <input type="maxScore" class="form-control" id="maxPoints" placeholder="Max Points?">
+                            </div>
+                            <label for="isRanked"  class="control-label col-sm-2"> Ranked Match? </label>
+                            <div class="col-sm-4">
+                                <input type="rankedMatch" class="form-control" id="isRanked" placeholder="Ranked?">
                             </div>
                         </div>
                     </form>

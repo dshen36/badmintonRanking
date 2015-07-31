@@ -61,3 +61,19 @@ body{
         border-top:0 none;
     }
 }
+/*.radio-label {
+    display: inline-block;
+    vertical-align: bottom;
+    margin: 0.25em;
+}
+.radio-input {
+    display: inline-block;
+    vertical-align: top;
+}
+#rankedBoolean {
+    text-align: center;
+}
+#rankedDiv {
+    margin: auto;
+    text-align: center;
+}*/

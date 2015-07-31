@@ -164,97 +164,38 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="maxPoints"  class="col-sm-2 control-label"> Game of how many points? </label>
+                            <label for="maxPoints"  class="col-sm-2 control-label"> Max Score? </label>
                             <div class="col-sm-4">
-                                <input type="maxScore" class="form-control" id="maxPoints" placeholder="Max Points?">
+                               <!--  <input type="maxScore" class="form-control" id="maxPoints" placeholder="Max Points?"> -->
+                                <select class="form-control" id="maxPoints">   
+                                    <option value="" disabled selected>Max Points?</option>
+                                    <option value="11">11 Pts</option>
+                                    <option value="15">15 Pts</option>
+                                    <option value="21">21 Pts</option>
+                                </select>
                             </div>
-                            <label for="isRanked"  class="control-label col-sm-2"> Ranked Match? </label>
-                            <div class="col-sm-4">
-                                <input type="rankedMatch" class="form-control" id="isRanked" placeholder="Ranked?">
-                            </div>
+                            <!-- <fieldset id="rankedBoolean"  class="col-sm-6"> -->
+                                <label for="isRanked"  class="control-label col-sm-2"> Ranked? </label>
+                                <div class="col-sm-4 ">
+                                    <select class="form-control" id="isRanked">   
+                                    <option value="" disabled selected>Ranked Match?</option>
+                                    <option value="Yes">Yes</option>
+                                    <option value="No">No</option>
+                                </select>
+                                </div>
+                            <!-- </fieldset> -->
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <span class="input-group-btn">
-                        <input type="submit" class="btn btn-primary" value="Submit Match" id="submitData" data-dismiss="modal">
+                        <input type="submit" class="btn btn-primary" value="Create Match" id="createMatch" data-dismiss="modal">
                         <button type="button" class="btn btn-default" data-dismiss="modal" >Close</button>
                     </span>
                 </div>
             </div>
         </div>
     </div>
-
-  <!-- ~~~~~~~~~~~~~~~SIGN UP~~~~~~~~~~~~~~~~~~~~~~-->
-    <div class="modal fade" id="signUp" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="exampleModalLabel">Feather Feed Sign Up</h4>
-                </div>
-                <div class="modal-body">
-                    <form id="newGame" class="form-horizontal">
-                        <div class="form-group">
-                            <label for="signUpName"  class="col-sm-2 control-label"> Name: </label>
-                            <div class="col-sm-4">
-                                <input type="Name" class="form-control" id="signUpName" placeholder="Name">
-                            </div>
-                            <label for="signUpUsername"  class="control-label col-sm-2"> Username: </label>
-                            <div class="col-sm-4">
-                                <input type="Username" class="form-control" id="signUpUsername" placeholder="Username">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="signUpEmail"  class="col-sm-2 control-label"> Email: </label>
-                            <div class="col-sm-4">
-                                <input type="email" class="form-control" id="signUpEmail" placeholder="Email">
-                            </div>
-                            <label for="signUpSchool"  class="control-label col-sm-2"> School: </label>
-                            <div class="col-sm-4">
-                                <input type="school" class="form-control" id="signUpSchool" placeholder="School">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="signUpPassword"  class="col-sm-2 control-label"> Password: </label>
-                            <div class="col-sm-4">
-                                <input type="password" class="form-control" id="signUpPassword" placeholder="Password">
-                            </div>
-                            <label for="confirmPassword"  class="control-label col-sm-2"> Confirm Password: </label>
-                            <div class="col-sm-4">
-                                <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm Your Password">
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <span class="input-group-btn">
-                        <input type="submit" class="btn btn-primary" value="Create User!" id="createUser" data-dismiss="modal">
-                        <button type="button" class="btn btn-default" data-dismiss="modal" >Close</button>
-                    </span>
-                </div>
-            </div>
-        </div>
-    </div>
-  
-  <!-- ~~~~~~~~~~~~~~~login~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--     <form class="login-form">
-        <h2>Log In</h2>
-        <div class="error" style="display:none"></div>
-        <input type="text" id="login-username" placeholder="Username" />
-        <input type="password" id="login-password" placeholder="Password" />
-        <button>Log In</button>
-    </form>
-    <form class="signup-form">
-        <h2>Sign Up</h2>
-        <div class="error" style="display:none"></div>
-        <input type="text" id="signup-username" placeholder="Username" />
-        <input type="password" id="signup-password" placeholder="Create a Password" />
-        <button>Sign Up</button>
-    </form> -->
-
-  
-  
     <script src="js/bootstrap.min.js"></script>
 </body>
 

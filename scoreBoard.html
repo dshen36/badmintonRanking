@@ -1,0 +1,88 @@
+<!doctype html>
+<head>
+    <meta charset="utf-8">
+
+    <title>My Parse App</title>
+    <meta name="description" content="My Parse App">
+    <meta name="viewport" content="width=device-width">
+    <!-- <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/styles.css"> -->
+    <link rel="stylesheet"  href="css/bootstrap.min.css">
+    <!-- <link rel="stylesheet"  href="css/custom.css"> -->
+    <script type="text/javascript" src="jQuery.js"></script>
+    <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.5.0.min.js"></script>
+    <script type="text/javascript">
+        window.loggedInUser="user";
+    </script>
+    <script src="script.js"></script>
+    <link rel="stylesheet" type="text/css" href="fontAwesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="navbar.css">
+</head>
+
+<body>
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~NAVBAR~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+    <nav class="navbar navbar-default navbar-inverse" role="navigation">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Feather Feed</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <!-- <li class="active " style="text-align:center;" ><button type="button" class="btn btn-primary" data-toggle="modal" id="logOut" style="margin-top:7px;"> Log Out </button></li>  -->
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li class="divider"></li>
+                <li><a href="#">Separated link</a></li>
+                <li class="divider"></li>
+                <li><a href="#">One more separated link</a></li>
+              </ul>
+            </li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><p id="welcomeUser" class="navbar-text">Welcome <script>
+                    console.log("the user is: " +getCurrentUser());
+                    
+                    document.getElementById("welcomeUser").innerHTML = 'Welcome ' + String(getCurrentUser()) + '!';
+                </script></p></li>
+            <li class="dropdown">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Log Out</b> <span class="caret"></span></a>
+                <ul id="login-dp" class="dropdown-menu">
+                    <li>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <button type="button" class="btn btn-primary btn-block" data-toggle="modal" id="logOut" style="margin-top:7px; margin-bottom:0.5em;"> Log Out </button>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+
+    
+    
+
+
+
+  
+  
+    <script src="js/bootstrap.min.js"></script>
+</body>
+
+</html>

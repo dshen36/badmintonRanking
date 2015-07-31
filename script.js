@@ -9,9 +9,23 @@ $(document).ready(function() {
 		e.preventDefault();
 		createGameForm();
 	})
-    $('#submitData').on('click', function (e) {
+	$('#submitData').on('click', function (e) {
 		e.preventDefault();
 		submitGame();
+	})
+	$('#playMatch').on('click',function (e) {
+		e.preventDefault();
+		populatePlayers();
+	})
+    $('#createMatch').on('click', function (e) {
+		e.preventDefault();
+		var player1 = $("#player1").val();
+		var player2 = $("#player2").val();
+		var points = $("#maxPoints").val();
+		var isRanked = $("#isRanked").val();
+
+		//console.log(player1 + ", " + player2 + ", " + points + ", " + isRanked);
+		//createMatch(player1,player2,points,isRanked);
 	})
 	$('#createUser').on('click', function(e) {
 	    e.preventDefault();
@@ -205,6 +219,49 @@ function submitGame() {
 		alert("Error: " + error.code + " " + error.message);
 	});
 }
+
+function populatePlayers() {//onclick of (Report Game)
+	var Player = Parse.Object.extend("User");
+	var query = new Parse.Query(Player);
+	query.find({
+		success: function(players) {
+			console.log(players.length);
+			var selectW = document.getElementById("player1");
+			var lengthW = selectW.options.length;
+			if (lengthW >= 2) { //this gets rid of the text "select the winner" when you reclick on the button
+				for (i = 0; i < lengthW; i++) {
+				  selectW.options[0] = null;
+				}
+			}
+			var selectL = document.getElementById("player2");
+			var lengthL = selectL.options.length;
+			if (lengthL >= 2) { //this gets rid of the text "select the winner" when you reclick on the button
+				for (i = 0; i < lengthL; i++) {
+				  selectL.options[0] = null;
+				}
+			}
+			//<option value="" disabled selected>Select the Winner</option>
+			for (var i = 0; i < players.length; i++) { 
+  				var player = players[i];
+  				if(sessionStorage.getItem(String(player.get('name'))) !== String(player.get('name'))) {
+  					sessionStorage.setItem(String(player.get('name')),String(player.get('name')));
+		   		}
+		   		(function($) {
+	      			$('#player1').append($("<option></option>")
+			    	.attr("value",String(sessionStorage.getItem(String(player.get('name')))))
+			    	.text(String(sessionStorage.getItem(String(player.get('name')))))); 
+			    	$('#player2').append($("<option></option>")
+			    	.attr("value",String(sessionStorage.getItem(String(player.get('name')))))
+			    	.text(String(sessionStorage.getItem(String(player.get('name')))))); 
+	      		})(jQuery);
+		   	}
+	    },
+	    error: function(error) {
+	    	alert("Error: " + error.code + " " + error.message);
+	    }
+	});
+}
+
 
 function searchUserHistory() {
 	var searchVal = $("#searchInput").val();

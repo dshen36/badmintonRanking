@@ -8,8 +8,10 @@
     <!-- <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/styles.css"> -->
     <link rel="stylesheet"  href="css/bootstrap.min.css">
+    <link rel="stylesheet"  href="scoreBoardStyle.css">
     <!-- <link rel="stylesheet"  href="css/custom.css"> -->
     <script type="text/javascript" src="jQuery.js"></script>
+
     <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.5.0.min.js"></script>
     <script type="text/javascript">
         window.loggedInUser="user";
@@ -52,12 +54,12 @@
             </li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li><p id="welcomeUser" class="navbar-text">Welcome <script>
+            <!-- <li><p id="welcomeUser" class="navbar-text">Welcome <script>
                     console.log("the user is: " +getCurrentUser());
                     
                     document.getElementById("welcomeUser").innerHTML = 'Welcome ' + String(getCurrentUser()) + '!';
                 </script></p></li>
-            <li class="dropdown">
+            <li class="dropdown"> -->
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Log Out</b> <span class="caret"></span></a>
                 <ul id="login-dp" class="dropdown-menu">
@@ -75,14 +77,30 @@
       </div><!-- /.container-fluid -->
     </nav>
 
-    
+
+    <article class="scoreboard" id="scoreboard">
+        <div class="teams">
+            <span class="team">Team A</span>
+            <span class="score">
+                <span data-scoreboard-bind="homeTeamGoals"></span>
+                -
+                <span data-scoreboard-bind="awayTeamGoals"></span>
+            </span>
+            <span class="team">Team B</span>
+        </div>
+        <span class="time" >Time</span>
+    </article>
+
+
+
     
 
 
 
   
   
-    <script src="js/bootstrap.min.js"></script>
+    
 </body>
-
+    <script src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="scoreBoardManager.js"></script>
 </html>

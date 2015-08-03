@@ -1,17 +1,20 @@
 .scoreboard {
 	font: normal 14px/40px Arial, sans-serif;
-	height: 40px;
-	width: 380px;
+	line-height: 4em;
+	height: 4em; /*40px*/
+	width: 75%; /*380px*/
 	background: #FFF100;
 	text-align: center;
+	margin: auto;
 	color: #fff;
+	font-weight: bold;
 }
 
 	.scoreboard > .teams {
 		color: #323031;
 		font-weight: bold;
 		float: left;
-		width: 280px;
+		width: 100%;
 	}
 	
 		.scoreboard > .teams > span {
@@ -19,10 +22,31 @@
 			width: 33.333%;
 		}
 	
-	.scoreboard > .time {
+	.scoreFeed {
+		height: 8em;
+		line-height: 8em; 
+		/*background: #FFF100;*/
+		margin: auto;
+
+	}
+	.scoreFeedBackground {
+		z-index:-1;
+		width: 11.111%;
+		margin: auto;
+		position: absolute;
+		border-top: 8em solid transparent;
+		border-right: 8em solid #fff;
+		border-left: 8em solid #fff;
+	}
+	.time {
+		line-height: 4em;
+		height: 4em;
 		float: left;
-		width: 100px;
-		background: #323031 !important;
+		width: 33.333%;
+		background: #222;/* #323031;*/
+		margin-left: 33.333%;
+		color: #fff;
+		text-align: center;
 	}
 	
 .scoreboard-message {

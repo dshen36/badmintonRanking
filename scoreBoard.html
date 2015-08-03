@@ -73,12 +73,12 @@
                 </ul>
             </li>
           </ul>
-        </div><!-- /.navbar-collapse -->
+        </div><!-- /.navbar-collap-->
       </div><!-- /.container-fluid -->
     </nav>
 
 
-    <article class="scoreboard" id="scoreboard">
+<!--     <article class="scoreboard" id="scoreboard">
         <div class="teams">
             <span class="team">Team A</span>
             <span class="score">
@@ -89,7 +89,23 @@
             <span class="team">Team B</span>
         </div>
         <span class="time" >Time</span>
+    </article> -->
+
+    <article class="scoreboard">
+        <div class="teams">
+            <span class="team">Team A</span>
+            <span class="score">
+                <span data-scoreboard-bind="homeTeamGoals"></span>
+                <div class= scoreFeedBackground></div>
+                <div class= scoreFeed><i class="fa fa-shield fa-5x"></i> </div>
+                <!-- <i class="fa fa-shield fa-5x"></i> -->
+                <span data-scoreboard-bind="awayTeamGoals"></span>
+            </span>
+            <span class="team">Team B</span>
+        </div>
+        
     </article>
+    <!-- <article ><span class="time" ><i class="fa fa-clock-o fa-3x"></i></span></article> -->
 
 
 

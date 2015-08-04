@@ -51,21 +51,43 @@
 		margin-top: 4em;
 		border-bottom-right-radius: 2em;
 		border-bottom-left-radius: 2em;
+		border-bottom: 0.2em solid white;
 
 	}
-	
+	#clock {
+		width: 33.333%;
+		position: absolute;
+		border: 0.1em solid blue;
+	}
+	.player {
+		height: 2em;
+		width: auto;
+		border: 0.1em solid white;
+		position: relative;
+		white-space: nowrap;
+		line-height: 2em !important;
+		/*margin: auto;*/
+	}
+	#playerA {
+		float: left;
+	}
+	#playerB {
+		float: right;
+		/*right:0;*/
+	}
 	.playerScoreA {
 		/*height: 75%;*/
 		z-index: -1;
 		position: relative;
 		margin-top:-12em;
 		height: 30em;
-		width: 50%;
-		background: gray;
+		width: 35.25%;
+		left: 14.9%;
+		background: black;
 		float: left;
 		border-top-left-radius: 2em;
 		border-bottom-left-radius: 2em;
-		border: 0.2em solid black;
+		border: 0.2em solid white;
 	}
 	.playerScoreB {
 		/*height: 75%;*/
@@ -73,12 +95,13 @@
 		position: relative;
 		margin-top:-12em;
 		height: 30em;
-		width: 50%;
-		background: gray;
+		width: 35.25%;
+		right:14.9%;
+		background: black;
 		float: right;
 		border-top-right-radius: 2em;
 		border-bottom-right-radius: 2em;
-		border: 0.2em solid black;
+		border: 0.2em solid white;
 	}
 .scoreboard-message {
 	font: normal 14px Arial, sans-serif;

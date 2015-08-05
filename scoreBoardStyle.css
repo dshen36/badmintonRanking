@@ -13,7 +13,7 @@
 	position: absolute;
 	left: 12.5%;
 	border: 0.25em solid black;
-	font-size: 1.15vw;
+	font-size: 1.33vw;
 }
 
 	.scoreboard > .teams {
@@ -38,6 +38,10 @@
 		border-radius:100%;
 		border-bottom: 0.4em solid black;
 	}
+	.numWins {
+		margin-left: 0.5em;
+		margin-right: 0.5em;
+	}
 
 	.time {
 		z-index: 2;
@@ -53,7 +57,7 @@
 		border-bottom-right-radius: 2em;
 		border-bottom-left-radius: 2em;
 		border-bottom: 0.2em solid white;
-		font-size: 1.15vw; 
+		font-size: 1.33vw; 
 	}
 	#clock {
 		width: 33.333%;
@@ -63,10 +67,11 @@
 	.player {
 		height: 2em;
 		width: auto;
-		border: 0.1em solid white;
 		position: relative;
 		white-space: nowrap;
 		line-height: 2em !important;
+		margin-left: 3em;
+		margin-right: 3em;
 		/*margin: auto;*/
 		
 		top: 2.5em;
@@ -78,34 +83,55 @@
 		float: right;
 		/*right:0;*/
 	}
+	.playerScore {
+		/*height: 75%;*/
+		z-index: -1;
+		position: absolute;
+		height: 3.25em;
+		width: 35.25%;
+		background: black;
+		border: 0.02em solid white;
+		color: #FFF100;
+		font-size: 12vw;
+		line-height: 4em;
+		text-align: center;
+		/*padding-top: 3vh;*/
+	}
+
 	#playerScoreA {
 		/*height: 75%;*/
-		z-index: -1;
-		position: absolute;
 		/*margin-top:-12em;*/
-		height: 30em;
-		width: 35.25%;
 		left: 14.9%;
-		background: black;
 		float: left;
-		border-top-left-radius: 2em;
-		border-bottom-left-radius: 2em;
-		border: 0.2em solid white;
+		border-top-left-radius: 0.1em;
+		border-bottom-left-radius: 0.1em;
 	}
+
 	#playerScoreB {
 		/*height: 75%;*/
-		z-index: -1;
-		position: absolute;
 		/*margin-top:-12em;*/
-		height: 30em;
-		width: 35.25%;
 		right:14.9%;
-		background: black;
 		float: right;
-		border-top-right-radius: 2em;
-		border-bottom-right-radius: 2em;
-		border: 0.2em solid white;
+		border-top-right-radius: 0.1em;
+		border-bottom-right-radius: 0.1em;
 	}
+
+	#pointPanel {
+		margin: auto;
+		padding: 0;
+		list-style-type: none;
+		text-align: center;
+		width: 100%;
+		
+	}
+	.point {
+		margin: 2em;
+		float: left;
+		display: block;
+		width: 20%;
+	}
+
+/*------------------------------------------------------------------------------------*/
 .scoreboard-message {
 	font: normal 14px Arial, sans-serif;
 	background: #e64f61;

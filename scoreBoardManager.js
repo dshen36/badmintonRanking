@@ -13,6 +13,9 @@ $(document).ready(function() {
 	// console.log("heightSB: " + heightSB + " ,heightPSA:" + heightPSA);
 	// var difference = heightPSA - heightSB; //not the actual height where it is anchored, but the height from top to bottom
 	// console.log("difference in pixels: " + difference);
+	
+	// setPlayer("#playerA",sessionStorage.getItem("p1"));
+	// setPlayer("#playerB",sessionStorage.getItem("p2"));
 	$('#pointA').on('click',function (e) {
 		e.preventDefault();
 		pointManager('#pointA');
@@ -51,9 +54,9 @@ $(document).ready(function() {
 		if (numRallies >= 1) {
 			var lastWinner = rallyTracker[numRallies-1];
 		} else {
+			numRallies+=1;
 			return;
 		}
-
 		if (lastWinner === '#pointA') {
 			scoreA -= 1;
 			document.getElementById("playerScoreA").innerHTML = scoreA;
@@ -63,4 +66,7 @@ $(document).ready(function() {
 		}
 		console.log(numRallies);
 	}
+	// function setPlayer(id,name) {
+	// 	document.getElementById(id).innerHTML = name;
+	// }
 });

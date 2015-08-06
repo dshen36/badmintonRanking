@@ -19,11 +19,7 @@ $(document).ready(function() {
 	})
     $('#createMatch').on('click', function (e) {
 		e.preventDefault();
-		var player1 = $("#player1").val();
-		var player2 = $("#player2").val();
-		var points = $("#maxPoints").val();
-		var isRanked = $("#isRanked").val();
-
+		createScoreBoard();
 		//console.log(player1 + ", " + player2 + ", " + points + ", " + isRanked);
 		//createMatch(player1,player2,points,isRanked);
 	})
@@ -220,7 +216,7 @@ function submitGame() {
 	});
 }
 
-function populatePlayers() {//onclick of (Report Game)
+function populatePlayers() {//onclick of (play match)
 	var Player = Parse.Object.extend("User");
 	var query = new Parse.Query(Player);
 	query.find({
@@ -262,6 +258,19 @@ function populatePlayers() {//onclick of (Report Game)
 	});
 }
 
+function createScoreBoard() {
+	var player1 = $("#player1").val();
+	var player2 = $("#player2").val();
+	var points = $("#maxPoints").val();
+	var isRanked = $("#isRanked").val();
+	// console.log("player1: " + player1 + "player2: " + player2);
+	sessionStorage.setItem("p1",player1);
+	sessionStorage.setItem("p2",player2);
+	sessionStorage.setItem("pts",points);
+	sessionStorage.setItem("isRanked",isRanked);
+	//return sessionStorage.getItem("user");
+	window.location.replace("scoreBoard.html");
+}
 
 function searchUserHistory() {
 	var searchVal = $("#searchInput").val();
@@ -323,6 +332,7 @@ function findUserAttr(given,givenAttr) {
 		alert("Error: " + error.code + " " + error.message);
 	});
 }
+
 
 // function desiredCredentials(desired,desiredAttr) { //for search bar
 // 	var Player = Parse.Object.extend("User");

@@ -110,12 +110,16 @@
     </article>
     <article >
         <span class="time" >
-            <div id="playerA" class="player" >
-                Dan Shen
+            <div id="playerA" class="player">
+                <script>
+                    document.getElementById("playerA").innerHTML = sessionStorage.getItem("p1");
+                </script>
             </div>
             <i id="clock" class="fa fa-clock-o fa-3x"> 21:09 </i>
             <div id="playerB" class="player" >
-                Nunthadech Rodcheuy
+                <script>
+                    document.getElementById("playerB").innerHTML = sessionStorage.getItem("p2");
+                </script>
             </div>
         </span>
     </article>

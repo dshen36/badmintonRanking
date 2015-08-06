@@ -117,6 +117,17 @@
 		border-bottom-right-radius: 0.1em;
 	}
 
+	#serving {
+		position: absolute;
+		margin: auto;
+		z-index: 4;
+		font-size: 5vw;
+		width: 10%;
+		left: 45%;
+		top: 30vw;
+		/*background: #222;*/
+	}
+
 	#pointPanel {
 		/*position: absolute*/
 		margin: 0;

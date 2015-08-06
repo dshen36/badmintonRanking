@@ -36,13 +36,24 @@ $(document).ready(function() {
 	// var lastRallyWinner = "";
 	var numRallies = 1; //this is going to keep track of who won which points. Also useful for undoPoint
 	var rallyTracker = [];
+	var isLeftServing = true;
 	function pointManager(winner) {
 		if (winner === '#pointA') {
 			scoreA += 1;
 			document.getElementById("playerScoreA").innerHTML = scoreA;
+			if (!isLeftServing) {
+				$("#server").toggleClass("fa-flip-horizontal");
+				isLeftServing = true;
+			}
+			// var d = document.getElementById("playerScoreA");
+			// d.className = d.className + " fa-flip-horizontal";
 		} else if (winner === '#pointB') {
 			scoreB += 1;
 			document.getElementById("playerScoreB").innerHTML = scoreB;
+			if (isLeftServing) {
+				$("#server").toggleClass("fa-flip-horizontal"); //gotta switch the arrows if undo.
+				isLeftServing = false;
+			}
 		}
 		// lastRallyWinner = winner;
 		rallyTracker[numRallies-1] = winner;

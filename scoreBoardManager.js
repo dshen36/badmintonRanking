@@ -61,19 +61,30 @@ $(document).ready(function() {
 		console.log(numRallies);
 	}
 	function undoPoint() {
+		var serverCheck = numRallies;
 		numRallies -= 1;
+
+		//edge case against pressing undo when 0 points have been played
 		if (numRallies >= 1) {
 			var lastWinner = rallyTracker[numRallies-1];
 		} else {
 			numRallies+=1;
 			return;
 		}
+
+
 		if (lastWinner === '#pointA') {
 			scoreA -= 1;
 			document.getElementById("playerScoreA").innerHTML = scoreA;
 		} else if (lastWinner === '#pointB') {
 			scoreB -= 1;
 			document.getElementById("playerScoreB").innerHTML = scoreB;
+		}
+		if (rallyTracker[numRallies-1] !== rallyTracker[serverCheck-1]) {
+			$("#server").toggleClass("fa-flip-horizontal");
+			console.log("pre: " + isLeftServing);
+			isLeftServing = !isLeftServing;
+			console.log("post: " + isLeftServing);
 		}
 		console.log(numRallies);
 	}

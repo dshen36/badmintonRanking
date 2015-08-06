@@ -115,7 +115,9 @@
                     document.getElementById("playerA").innerHTML = sessionStorage.getItem("p1");
                 </script>
             </div>
-            <i id="clock" class="fa fa-clock-o fa-3x"> 21:09 </i>
+                <i id="clock" class="fa fa-clock-o fa-3x">
+                    <span id="time">00:00</span>
+                </i>
             <div id="playerB" class="player" >
                 <script>
                     document.getElementById("playerB").innerHTML = sessionStorage.getItem("p2");
@@ -163,6 +165,8 @@
         <button type="button" class="point btn btn-primary" id="undoPoint"> Undo </button>
         <button type="button" class="point btn btn-primary" id="pointB">Point Won</button>
     </div> -->
+    <input type="button" value="Start" id="toggleClock">
+    <input type="button" value="reset" onclick="reset()">
 
 
 
@@ -177,4 +181,5 @@
 </body>
     <script src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="scoreBoardManager.js"></script>
+    <script type="text/javascript" src="timer.js"></script>
 </html>

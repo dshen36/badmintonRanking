@@ -37,7 +37,7 @@ $(document).ready(function() {
 	var numRallies = 1; //this is going to keep track of who won which points. Also useful for undoPoint
 	var rallyTracker = [];
 	var isLeftServing = true;
-	var firstServe = sessionStorage.getItem("p1"); //eventually winner of coin flip
+	var firstServe = '#pointA'; //sessionStorage.getItem("p1"); //eventually winner of coin flip
 	function pointManager(winner) {
 		if (winner === '#pointA') {
 			scoreA += 1;
@@ -61,7 +61,7 @@ $(document).ready(function() {
 		numRallies+=1;
 		console.log(numRallies);
 	}
-	function undoPoint() {
+	function undoPoint() {//pressing undo when 0
 		var serverCheck = numRallies;
 		numRallies -= 1;
 
@@ -81,12 +81,18 @@ $(document).ready(function() {
 			document.getElementById("playerScoreB").innerHTML = scoreB;
 		}
 
-		if (rallyTracker[numRallies-2] !== rallyTracker[numRallies-1] ) { //&& notfirst point. if first point, then set server to winner of coin flip
-			console.log(rallyTracker[numRallies-1] + " , " + rallyTracker[serverCheck-1]);
+		if (rallyTracker[numRallies-2] !== rallyTracker[numRallies-1] && (numRallies !== 1) ) { //&& notfirst point. if first point, then set server to winner of coin flip
+			// console.log(rallyTracker[numRallies-1] + " , " + rallyTracker[serverCheck-1]);
 			$("#server").toggleClass("fa-flip-horizontal");
-			console.log("pre: " + isLeftServing);
+			// console.log("pre: " + isLeftServing);
 			isLeftServing = !isLeftServing;
-			console.log("post: " + isLeftServing);
+			// console.log("post: " + isLeftServing);
+		}
+		if (numRallies === 1 && (rallyTracker[numRallies] !== firstServe)) {
+			 console.log("winner at # " + numRallies + " " +rallyTracker[numRallies]);
+			 console.log("first server = " + firstServe);
+			$("#server").toggleClass("fa-flip-horizontal");
+			// LeftServing = !isLeftServing; //arrow isn't switching after getting back to score of 0.
 		}
 		console.log(numRallies);
 	}

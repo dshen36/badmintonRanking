@@ -37,6 +37,7 @@ $(document).ready(function() {
 	var numRallies = 1; //this is going to keep track of who won which points. Also useful for undoPoint
 	var rallyTracker = [];
 	var isLeftServing = true;
+	var firstServe = sessionStorage.getItem("p1"); //eventually winner of coin flip
 	function pointManager(winner) {
 		if (winner === '#pointA') {
 			scoreA += 1;
@@ -72,7 +73,6 @@ $(document).ready(function() {
 			return;
 		}
 
-
 		if (lastWinner === '#pointA') {
 			scoreA -= 1;
 			document.getElementById("playerScoreA").innerHTML = scoreA;
@@ -80,7 +80,9 @@ $(document).ready(function() {
 			scoreB -= 1;
 			document.getElementById("playerScoreB").innerHTML = scoreB;
 		}
-		if (rallyTracker[numRallies-1] !== rallyTracker[serverCheck-1]) {
+
+		if (rallyTracker[numRallies-2] !== rallyTracker[numRallies-1] ) { //&& notfirst point. if first point, then set server to winner of coin flip
+			console.log(rallyTracker[numRallies-1] + " , " + rallyTracker[serverCheck-1]);
 			$("#server").toggleClass("fa-flip-horizontal");
 			console.log("pre: " + isLeftServing);
 			isLeftServing = !isLeftServing;

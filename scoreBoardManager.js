@@ -42,7 +42,7 @@ $(document).ready(function() {
 		if (winner === '#pointA') {
 			scoreA += 1;
 			document.getElementById("playerScoreA").innerHTML = scoreA;
-			if (!isLeftServing) {
+			if (!isLeftServing) { //uh what do i do here
 				$("#server").toggleClass("fa-flip-horizontal");
 				isLeftServing = true;
 			}
@@ -85,18 +85,26 @@ $(document).ready(function() {
 			// console.log(rallyTracker[numRallies-1] + " , " + rallyTracker[serverCheck-1]);
 			$("#server").toggleClass("fa-flip-horizontal");
 			// console.log("pre: " + isLeftServing);
-			isLeftServing = !isLeftServing;
+			toggle()// isLeftServing = !isLeftServing;
 			// console.log("post: " + isLeftServing);
 		}
-		if (numRallies === 1 && (rallyTracker[numRallies] !== firstServe)) {
+		if (numRallies === 1 && (rallyTracker[numRallies-1] !== firstServe)) {
 			 console.log("winner at # " + numRallies + " " +rallyTracker[numRallies]);
 			 console.log("first server = " + firstServe);
 			$("#server").toggleClass("fa-flip-horizontal");
-			// LeftServing = !isLeftServing; //arrow isn't switching after getting back to score of 0.
+			toggle()// LeftServing = !isLeftServing; //arrow isn't switching after getting back to score of 0.
 		}
-		console.log(numRallies);
+		console.log(numRallies + " , " + isLeftServing);
+
 	}
 	// function setPlayer(id,name) {
 	// 	document.getElementById(id).innerHTML = name;
 	// }
+	function toggle() {
+		if (isLeftServing === true) {
+			isLeftServing = false;
+		} else if (isLeftServing === false) {
+			isLeftServing = true;
+		}
+	}
 });

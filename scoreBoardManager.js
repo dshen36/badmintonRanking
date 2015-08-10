@@ -36,6 +36,14 @@ $(document).ready(function() {
 		e.preventDefault();
 		decideStarter();
 	})
+	$('#finishMatch').on('click',function (e) {
+		e.preventDefault();
+		confirmMatch();
+	})
+	// $('#finishMatch').on('click',function (e) {
+	// 	e.preventDefault();
+	// 	// confirmMatch();
+	// })
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -43,7 +51,6 @@ $(document).ready(function() {
 		console.log("pressed Heads")
 		$("#flipCoin").fadeOut("slow");
 		$("#flipCoinDesign").fadeOut("slow");
-
 		//$("#flipCoin").remove();
 	}
 
@@ -119,5 +126,31 @@ $(document).ready(function() {
 		} else if (isLeftServing === false) {
 			isLeftServing = true;
 		}
+	}
+	function confirmMatch() {
+		var pA = sessionStorage.getItem("p1");
+		var pB = sessionStorage.getItem("p2");
+		var winnerPts,loserPts,winner,loser;
+		if (scoreA >= scoreB) {
+			winnerPts = scoreA;
+			loserPts = scoreB;
+			winner = pA;
+			loser = pB;
+		} else {
+			winnerPts = scoreB;
+			loserPts = scoreA;
+			winner = pB;
+			loser = pA;
+		}
+
+		// console.log(winner);
+		// console.log(loser);
+		console.log(sessionStorage.getItem("p2"));
+		document.getElementById("confirmWinner").value = winner;
+		document.getElementById("confirmLoser").value = loser;
+		document.getElementById("confirmScoreW").value = winnerPts;
+		document.getElementById("confirmScoreL").value = loserPts;
+
+
 	}
 });

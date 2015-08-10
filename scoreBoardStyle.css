@@ -58,7 +58,6 @@
 #decisionButton { /*for button*/
 	opacity: 1.0 !important;
 	position: absolute;
-
 	z-index: 4;
 	font-size: 5vw;
 	width: 40%;

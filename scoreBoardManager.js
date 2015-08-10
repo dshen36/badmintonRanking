@@ -107,4 +107,7 @@ $(document).ready(function() {
 			isLeftServing = true;
 		}
 	}
+	// function submitLiveMatch() {
+		
+	// }
 });

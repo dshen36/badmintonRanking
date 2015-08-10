@@ -22,6 +22,26 @@
 </head>
 
 <body>
+    <div id="flipCoin">
+        <H1 id="flipText">To decide who will go first, we will flip a coin.<br> 
+            Player 1
+            , Heads or Tails?
+        </H1>
+        <!-- <div> -->
+<!--         <div class="coinChoice">
+            <input type="button" class= " btn btn-warning" value="Heads" id="Heads">
+            <input type="button" class= " btn btn-warning" value="Tails" id="Tails">
+        </div> -->
+        <!-- </div> -->
+        <span id="decision" class="fa-stack fa-lg">
+            <i class="fa fa fa-circle fa-stack-2x fa-inverse"></i>
+            <i id="server" class="fa fa-question fa-stack-1x" style="font-weight: bold;"></i>
+            <div id="decisionPanel">
+                <input type="button" class= "coinButton btn btn-warning" value="Heads" id="Heads">
+                <input type="button" class= "coinButton btn btn-warning" value="Tails" id="Tails">
+            </div>
+        </span>
+    </div>
     <!-- ~~~~~~~~~~~~~~~~~~~~~~NAVBAR~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
     <nav class="navbar navbar-default navbar-inverse" role="navigation">
       <div class="container-fluid">
@@ -35,7 +55,7 @@
           </button>
           <a class="navbar-brand" href="#">Feather Feed</a>
         </div>
-
+        
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
@@ -52,6 +72,10 @@
                 <li><a href="#">One more separated link</a></li>
               </ul>
             </li>
+          </ul>
+          <ul class="nav navbar-nav navbar-left" style="margin-top:7px; margin-left:3.5px; margin-right:3.5px;">
+            <input type="button" class= "btn btn-primary" value="Start Clock" id="toggleClock">
+            <input type="button" class= "btn btn-primary" value="Reset Match" onclick="reset()">
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <!-- <li><p id="welcomeUser" class="navbar-text">Welcome <script>
@@ -134,7 +158,11 @@
     </div>
     <span id="serving" class="fa-stack fa-lg">
         <i class="fa fa fa-circle fa-stack-2x fa-inverse"></i>
-        <i id="server" class="fa fa-angle-double-left fa-stack-1x" style="font-weight: bold;"></i>
+        <i id="server" class="fa fa-angle-double-left fa-stack-1x" style="font-weight: bold;">
+            
+        <!-- <br><span id="serveLabel">server</span></br> -->
+        </i>
+
     </span>
     <!-- <i class="fa">server</i> -->
     <!-- <i class="fa fa-shield fa-flip-horizontal"></i> fa-flip-horizontal<br> used for flipping-->
@@ -171,8 +199,7 @@
         <button type="button" class="point btn btn-primary" id="undoPoint"> Undo </button>
         <button type="button" class="point btn btn-primary" id="pointB">Point Won</button>
     </div> -->
-    <input type="button" value="Start" id="toggleClock">
-    <input type="button" value="reset" onclick="reset()">
+    
 
 
 

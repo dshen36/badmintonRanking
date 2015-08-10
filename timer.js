@@ -20,10 +20,11 @@ $(document).ready(function(){
 	$( "#toggleClock" ).click(function() {
 		counter += 1;
 		if ((counter % 2) === 0) {
-			document.getElementById("toggleClock").innerHTML="Pause";
+			$("#toggleClock").prop('value', 'Pause');
+
 			start();
 		} else {
-			document.getElementById("toggleClock").innerHTML="Start";
+			$("#toggleClock").prop('value', 'Start');
 			stopTime();
 		}
 		console.log(counter);

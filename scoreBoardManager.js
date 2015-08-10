@@ -28,8 +28,24 @@ $(document).ready(function() {
 		e.preventDefault();
 		undoPoint();
 	})
+	$('#Heads').on('click',function (e) {
+		e.preventDefault();
+		decideStarter();
+	})
+	$('#Tails').on('click',function (e) {
+		e.preventDefault();
+		decideStarter();
+	})
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	function decideStarter() {
+		console.log("pressed Heads")
+		$("#flipCoin").fadeOut("slow");
+		$("#flipCoinDesign").fadeOut("slow");
+
+		//$("#flipCoin").remove();
+	}
 
 	var scoreA = 0;
 	var scoreB = 0;
@@ -97,9 +113,6 @@ $(document).ready(function() {
 		console.log(numRallies + " , " + isLeftServing);
 
 	}
-	// function setPlayer(id,name) {
-	// 	document.getElementById(id).innerHTML = name;
-	// }
 	function toggle() {
 		if (isLeftServing === true) {
 			isLeftServing = false;
@@ -107,7 +120,4 @@ $(document).ready(function() {
 			isLeftServing = true;
 		}
 	}
-	// function submitLiveMatch() {
-		
-	// }
 });

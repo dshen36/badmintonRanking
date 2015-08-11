@@ -23,13 +23,13 @@
 
 <body>
     <div id="flipCoin">
-        <H1 id="flipText">To decide who will go first, we will flip a coin.<br> 
-            Player 1
+        <H1 id="flipText">
+            <script type="text/javascript">document.getElementById("flipText").innerHTML = 'To decide who will go first, we will flip a coin.<br>' + sessionStorage.getItem("p1");</script>
             , Heads or Tails?
         </H1>
         <span id="decision" class="fa-stack fa-lg">
             <i class="fa fa fa-circle fa-stack-2x fa-inverse"></i>
-            <i id="server" class="fa fa-question fa-stack-1x" style="font-weight: bold;"></i>
+            <i id="whoServe" class="fa fa-question fa-stack-1x" style="font-weight: bold;"></i>
 <!--             <div id="decisionPanel">
                 <button type="submit" class= "coinButton btn btn-warning" value="Heads" id="Heads">Tails</button>
                 <button type="submit" class= "coinButton btn btn-warning" value="Tails" id="Tails">Heads</button>
@@ -160,14 +160,8 @@
     </div>
     <span id="serving" class="fa-stack fa-lg">
         <i class="fa fa fa-circle fa-stack-2x fa-inverse"></i>
-        <i id="server" class="fa fa-angle-double-left fa-stack-1x" style="font-weight: bold;">
-            
-        <!-- <br><span id="serveLabel">server</span></br> -->
-        </i>
-
+        <i id="server" class="fa fa-angle-double-left fa-stack-1x" style="font-weight: bold;"></i>
     </span>
-    <!-- <i class="fa">server</i> -->
-    <!-- <i class="fa fa-shield fa-flip-horizontal"></i> fa-flip-horizontal<br> used for flipping-->
     <div id="pointPanel" class="btn-group" role="group" aria-label="...">
         <button type="button" value=1 class="point btn btn-primary" id="pointA">Point Won</button>
         <button type="button" class="point btn btn-warning" id="undoPoint"> Undo </button>

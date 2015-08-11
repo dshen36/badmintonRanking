@@ -30,11 +30,11 @@ $(document).ready(function() {
 	})
 	$('#Heads').on('click',function (e) {
 		e.preventDefault();
-		decideStarter();
+		decideStarter(0); //0 denotes heads
 	})
 	$('#Tails').on('click',function (e) {
 		e.preventDefault();
-		decideStarter();
+		decideStarter(1); //1 denotes tails
 	})
 	$('#finishMatch').on('click',function (e) {
 		e.preventDefault();
@@ -46,21 +46,35 @@ $(document).ready(function() {
 	// })
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	var firstServe = '';
+	function decideStarter(coinSide) {
+		var flipped = Math.floor(getRandom()*2);
+		console.log("your choice: " + coinSide + " vs reality: " + flipped);
+		if (coinSide === flipped) {
+			firstServe = '#pointA'
+			alert("you were right!");
+		} else {
+			firstServe = '#pointB'
+			$("#server").toggleClass("fa-flip-horizontal");
+			alert("you weren't right :T");
+		}
 
-	function decideStarter() {
-		console.log("pressed Heads")
+		console.log(firstServe);
 		$("#flipCoin").fadeOut("slow");
 		$("#flipCoinDesign").fadeOut("slow");
 		//$("#flipCoin").remove();
-	}
 
+	}
+	function getRandom() {
+	  	return Math.random();
+	}
 	var scoreA = 0;
 	var scoreB = 0;
 	// var lastRallyWinner = "";
 	var numRallies = 1; //this is going to keep track of who won which points. Also useful for undoPoint
 	var rallyTracker = [];
 	var isLeftServing = true;
-	var firstServe = '#pointA'; //sessionStorage.getItem("p1"); //eventually winner of coin flip
+	 //sessionStorage.getItem("p1"); //eventually winner of coin flip
 	function pointManager(winner) {
 		if (winner === '#pointA') {
 			scoreA += 1;
@@ -131,7 +145,7 @@ $(document).ready(function() {
 		var pA = sessionStorage.getItem("p1");
 		var pB = sessionStorage.getItem("p2");
 		var winnerPts,loserPts,winner,loser;
-		if (scoreA >= scoreB) {
+		if (scoreA >= scoreB) { //ideally it would never be equal.
 			winnerPts = scoreA;
 			loserPts = scoreB;
 			winner = pA;
@@ -142,7 +156,6 @@ $(document).ready(function() {
 			winner = pB;
 			loser = pA;
 		}
-
 		// console.log(winner);
 		// console.log(loser);
 		console.log(sessionStorage.getItem("p2"));
@@ -150,7 +163,6 @@ $(document).ready(function() {
 		document.getElementById("confirmLoser").value = loser;
 		document.getElementById("confirmScoreW").value = winnerPts;
 		document.getElementById("confirmScoreL").value = loserPts;
-
-
 	}
+
 });

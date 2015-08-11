@@ -40,6 +40,10 @@ $(document).ready(function() {
 		e.preventDefault();
 		confirmMatch();
 	})
+	$('#confirmData').on('click',function (e) {
+		e.preventDefault();
+		submitConfirmation();
+	})
 	// $('#finishMatch').on('click',function (e) {
 	// 	e.preventDefault();
 	// 	// confirmMatch();
@@ -48,7 +52,7 @@ $(document).ready(function() {
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	var firstServe = '';
 	var isLeftServing = true;
-	
+
 	function decideStarter(coinSide) {
 		var flipped = Math.floor(getRandom()*2);
 		console.log("your choice: " + coinSide + " vs reality: " + flipped);
@@ -167,5 +171,50 @@ $(document).ready(function() {
 		document.getElementById("confirmScoreW").value = winnerPts;
 		document.getElementById("confirmScoreL").value = loserPts;
 	}
+	function submitConfirmation() {
+		//creating a new instance of the game
+		var Game = Parse.Object.extend("Game");
+		var match = new Game();
 
+		//retrieving the values of from the form
+		var winner = $("#confirmWinner").val();
+		var loser = $("#confirmLoser").val();
+		var winner_Score = parseInt($("#confirmScoreW").val());
+		var loser_Score = parseInt($("#confirmScoreL").val());
+		var winnerID = "";
+		var loserID = "";
+
+		match.set("loser",loser);
+		match.set("winner",winner);
+		match.set("winnerScore",winner_Score);
+		match.set("loserScore",loser_Score);
+		
+		//getting the userfrom the database
+		var Player = Parse.Object.extend("User");
+		var queryWin = new Parse.Query(Player);
+		var queryLose = new Parse.Query(Player);
+
+		queryWin.equalTo("name",winner);
+		queryLose.equalTo("name",loser);
+
+		queryWin.find().then(function(playersW) {
+			console.log("player id: " + playersW[0].id);
+			winnerID = playersW[0].id;
+			match.set("winnerID",winnerID);
+			return playersW[0].id;
+		}).then(function() {
+			return queryLose.find();
+		}).then(function(playersL) {
+			console.log("player id: " + playersL[0].id);
+			loserID = playersL[0].id;
+			match.set("loserID",loserID);
+			return playersL[0].id;
+		}).then(function() {
+			return match.save(null);
+		}).then(function(match) {
+			alert('new match recorded with an id of: ' + match.id);
+		}, function(error) {
+			alert("Error: " + error.code + " " + error.message);
+		});
+	}
 });

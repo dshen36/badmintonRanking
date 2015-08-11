@@ -47,6 +47,8 @@ $(document).ready(function() {
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	var firstServe = '';
+	var isLeftServing = true;
+	
 	function decideStarter(coinSide) {
 		var flipped = Math.floor(getRandom()*2);
 		console.log("your choice: " + coinSide + " vs reality: " + flipped);
@@ -55,6 +57,7 @@ $(document).ready(function() {
 			alert("you were right!");
 		} else {
 			firstServe = '#pointB'
+			isLeftServing = false;
 			$("#server").toggleClass("fa-flip-horizontal");
 			alert("you weren't right :T");
 		}
@@ -73,7 +76,7 @@ $(document).ready(function() {
 	// var lastRallyWinner = "";
 	var numRallies = 1; //this is going to keep track of who won which points. Also useful for undoPoint
 	var rallyTracker = [];
-	var isLeftServing = true;
+	
 	 //sessionStorage.getItem("p1"); //eventually winner of coin flip
 	function pointManager(winner) {
 		if (winner === '#pointA') {

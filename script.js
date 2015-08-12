@@ -63,12 +63,14 @@ function signUp() {
 	var password = $("#signUpPassword").val();
 	var confPassword = $("#confirmPassword").val();
 
+
 	if (password === confPassword) {//no .equals?
 		user.set("name", name);
 		user.set("school", school);
 		user.set("email", email);
 		user.set("username", username);
 		user.set("password", password);
+		user.set("rank", 1400);
 	} else {
 		//throw new error
 		alert("Passwords do not match! Please try again.")
@@ -100,6 +102,7 @@ function logIn(username,password) {
 		success: function(user) {
 			for (var i = 0; i < user.length; i++) {
 			  	var object = user[i];
+			  	sessionStorage.setItem((username + "Rank"),object.get('rank'));
 		    }
 		}, 
 		error: function(user,error) {

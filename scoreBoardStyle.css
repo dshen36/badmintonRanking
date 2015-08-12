@@ -35,15 +35,6 @@
 	font-size: 1vw;
 	z-index: 200;
 }
-
-/*.coinChoice {
-
-	position: relative;
-	z-index: 1001;
-	width: 25%;
-	left: 37.5%;
-}*/
-
 #decision {
 	opacity: 1.0 !important;
 	position: absolute;

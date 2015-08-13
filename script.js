@@ -20,7 +20,8 @@ $(document).ready(function() {
     $('#createMatch').on('click', function (e) {
 		e.preventDefault();
 		createScoreBoard();
-		e.preventDefault();
+		// e.preventDefault();
+		// location.assign("scoreBoard.html");
 		// window.location.replace("scoreBoard.html");
 		//console.log(player1 + ", " + player2 + ", " + points + ", " + isRanked);
 		//createMatch(player1,player2,points,isRanked);
@@ -269,6 +270,11 @@ function createScoreBoard() {
 	var points = $("#maxPoints").val();
 	var isRanked = $("#isRanked").val();
 	console.log(isRanked);
+	sessionStorage.setItem("p1",player1);
+	sessionStorage.setItem("p2",player2);
+	sessionStorage.setItem("pts",points);
+	sessionStorage.setItem("isRanked",isRanked);
+
 	if (isRanked === "Yes") {
 		var Player = Parse.Object.extend("User");
 		// var query = new Parse.Query(Player);
@@ -290,15 +296,14 @@ function createScoreBoard() {
 			sessionStorage.setItem("p2Rank",p2Rank);
 			console.log(p2Rank);
 			return p2Rank;
+		}).then(function() {
+			 window.location.replace("scoreBoard.html");
 		}, function(error) {
 			alert("Rank Retrieval Error: " + error.code + " " + error.message);
 		});
 	}
 	// console.log("player1: " + player1 + "player2: " + player2);
-	sessionStorage.setItem("p1",player1);
-	sessionStorage.setItem("p2",player2);
-	sessionStorage.setItem("pts",points);
-	sessionStorage.setItem("isRanked",isRanked);
+
 
 	
 }

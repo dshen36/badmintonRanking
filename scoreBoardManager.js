@@ -217,20 +217,20 @@ $(document).ready(function() {
 			alert("Error: " + error.code + " " + error.message);
 		});
 	}
-	function doneMatch(winner,loser) {
-		var eWin = calcExpectancy(winner,loser);
-		var eLose = calcExpectancy(loser,winner);
-		updateRanking(winner,eWin,1);
-		updateRanking(loser,eLose,0);
-	}
-	function calcExpectancy(a, b) {
-		double rA = a.getRanking(); //fix
-		double rB = b.getRanking(); //fix
-		double eA = (1/(1 + Math.pow(10,((rB - rA)/200))));
-		return eA;
-	}
-	function updateRanking(Player name, double e, int outcome) {
-		name.setRanking(name.getRanking() + Math.ceil(15*(outcome-e))); //fix
-		//if win, outcome=1,if lose, outcome = 0;
-	}
+	// function doneMatch(winner,loser) {
+	// 	var eWin = calcExpectancy(winner,loser);
+	// 	var eLose = calcExpectancy(loser,winner);
+	// 	updateRanking(winner,eWin,1);
+	// 	updateRanking(loser,eLose,0);
+	// }
+	// function calcExpectancy(a, b) {
+	// 	double rA = a.getRanking(); //fix
+	// 	double rB = b.getRanking(); //fix
+	// 	double eA = (1/(1 + Math.pow(10,((rB - rA)/200))));
+	// 	return eA;
+	// }
+	// function updateRanking(Player name, double e, int outcome) {
+	// 	name.setRanking(name.getRanking() + Math.ceil(15*(outcome-e))); //fix
+	// 	//if win, outcome=1,if lose, outcome = 0;
+	// }
 });

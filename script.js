@@ -20,6 +20,8 @@ $(document).ready(function() {
     $('#createMatch').on('click', function (e) {
 		e.preventDefault();
 		createScoreBoard();
+		e.preventDefault();
+		// window.location.replace("scoreBoard.html");
 		//console.log(player1 + ", " + player2 + ", " + points + ", " + isRanked);
 		//createMatch(player1,player2,points,isRanked);
 	})
@@ -266,13 +268,39 @@ function createScoreBoard() {
 	var player2 = $("#player2").val();
 	var points = $("#maxPoints").val();
 	var isRanked = $("#isRanked").val();
+	console.log(isRanked);
+	if (isRanked === "Yes") {
+		var Player = Parse.Object.extend("User");
+		// var query = new Parse.Query(Player);
+		var query1 = new Parse.Query(Player);
+		var query2 = new Parse.Query(Player);
+		query1.equalTo("name", player1);
+		query2.equalTo("name", player2);
+		console.log(player1+" "+player2);
+
+		query1.find().then(function(p1) {
+			p1Rank = p1[0].get('rank');
+			sessionStorage.setItem("p1Rank",p1Rank);
+			console.log(p1Rank);
+			return p1Rank;
+		}).then(function() {
+			return query2.find();
+		}).then(function(p2) {
+			p2Rank = p2[0].get('rank');
+			sessionStorage.setItem("p2Rank",p2Rank);
+			console.log(p2Rank);
+			return p2Rank;
+		}, function(error) {
+			alert("Rank Retrieval Error: " + error.code + " " + error.message);
+		});
+	}
 	// console.log("player1: " + player1 + "player2: " + player2);
 	sessionStorage.setItem("p1",player1);
 	sessionStorage.setItem("p2",player2);
 	sessionStorage.setItem("pts",points);
 	sessionStorage.setItem("isRanked",isRanked);
-	//return sessionStorage.getItem("user");
-	window.location.replace("scoreBoard.html");
+
+	
 }
 
 function searchUserHistory() {

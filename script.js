@@ -1,5 +1,9 @@
 Parse.initialize("LZns8tKGpiFr6f1NbgHatFoOAQ8KBm2m8X8SoEZF", "QGkhPTDc3qLV3mVNgisg7gAqGzbciuXhBTnnyYjy");
 
+// var Parse = require('parse').Parse;
+// Parse.Cloud.useMasterKey(config.parse_master_key);
+// Parse.initialize(parse_id, parse_key, parse_master_key);
+
 $(document).ready(function() {
 	$('#searchButton').on('click',function (e) {
 		e.preventDefault();
@@ -286,14 +290,14 @@ function createScoreBoard() {
 
 		query1.find().then(function(p1) {
 			p1Rank = p1[0].get('rank');
-			sessionStorage.setItem("p1Rank",p1Rank);
+			sessionStorage.setItem(player1+"Rank",p1Rank);
 			console.log(p1Rank);
 			return p1Rank;
 		}).then(function() {
 			return query2.find();
 		}).then(function(p2) {
 			p2Rank = p2[0].get('rank');
-			sessionStorage.setItem("p2Rank",p2Rank);
+			sessionStorage.setItem(player2+"Rank",p2Rank);
 			console.log(p2Rank);
 			return p2Rank;
 		}).then(function() {

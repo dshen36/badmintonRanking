@@ -43,6 +43,7 @@ $(document).ready(function() {
 	$('#confirmData').on('click',function (e) {
 		e.preventDefault();
 		submitConfirmation();
+		//submitRanks();
 	})
 	// $('#finishMatch').on('click',function (e) {
 	// 	e.preventDefault();
@@ -126,17 +127,14 @@ $(document).ready(function() {
 		}
 
 		if (rallyTracker[numRallies-2] !== rallyTracker[numRallies-1] && (numRallies !== 1) ) { //&& notfirst point. if first point, then set server to winner of coin flip
-			// console.log(rallyTracker[numRallies-1] + " , " + rallyTracker[serverCheck-1]);
 			$("#server").toggleClass("fa-flip-horizontal");
-			// console.log("pre: " + isLeftServing);
-			toggle()// isLeftServing = !isLeftServing;
-			// console.log("post: " + isLeftServing);
+			toggle();
 		}
 		if (numRallies === 1 && (rallyTracker[numRallies-1] !== firstServe)) {
 			 console.log("winner at # " + numRallies + " " +rallyTracker[numRallies]);
 			 console.log("first server = " + firstServe);
 			$("#server").toggleClass("fa-flip-horizontal");
-			toggle()// LeftServing = !isLeftServing; //arrow isn't switching after getting back to score of 0.
+			toggle();
 		}
 		console.log(numRallies + " , " + isLeftServing);
 
@@ -172,6 +170,7 @@ $(document).ready(function() {
 		document.getElementById("confirmScoreL").value = loserPts;
 	}
 	function submitConfirmation() {
+		// Parse.Cloud.useMasterKey();
 		//creating a new instance of the game
 		var Game = Parse.Object.extend("Game");
 		var match = new Game();
@@ -183,6 +182,9 @@ $(document).ready(function() {
 		var loser_Score = parseInt($("#confirmScoreL").val());
 		var winnerID = "";
 		var loserID = "";
+
+		sessionStorage.setItem("winner",winner);
+		sessionStorage.setItem("loser",loser);
 
 		match.set("loser",loser);
 		match.set("winner",winner);
@@ -197,16 +199,26 @@ $(document).ready(function() {
 		queryWin.equalTo("name",winner);
 		queryLose.equalTo("name",loser);
 
+		doneMatch(winner,loser);
+		// doneMatch(winner,loser).then(function() {
+		// 	return queryWin.find();
+		// })
+
 		queryWin.find().then(function(playersW) {
 			console.log("player id: " + playersW[0].id);
 			winnerID = playersW[0].id;
+			// playersW.set("rank",(sessionStorage.getItem(winner+"Rank")));
 			match.set("winnerID",winnerID);
-			return playersW[0].id;
+			return playersW; //return playersW[0].id;
+		}).then(function(playersW) {
+			playersW[0].set("rank",parseInt(sessionStorage.getItem(winner+"Rank")));
+			return playersW[0].save(null, {useMasterKey:true});
 		}).then(function() {
 			return queryLose.find();
 		}).then(function(playersL) {
 			console.log("player id: " + playersL[0].id);
 			loserID = playersL[0].id;
+			// playersL.set("rank",(sessionStorage.getItem(loser+"Rank")));
 			match.set("loserID",loserID);
 			return playersL[0].id;
 		}).then(function() {
@@ -217,20 +229,57 @@ $(document).ready(function() {
 			alert("Error: " + error.code + " " + error.message);
 		});
 	}
-	// function doneMatch(winner,loser) {
-	// 	var eWin = calcExpectancy(winner,loser);
-	// 	var eLose = calcExpectancy(loser,winner);
-	// 	updateRanking(winner,eWin,1);
-	// 	updateRanking(loser,eLose,0);
-	// }
-	// function calcExpectancy(a, b) {
-	// 	double rA = a.getRanking(); //fix
-	// 	double rB = b.getRanking(); //fix
-	// 	double eA = (1/(1 + Math.pow(10,((rB - rA)/200))));
-	// 	return eA;
-	// }
-	// function updateRanking(Player name, double e, int outcome) {
-	// 	name.setRanking(name.getRanking() + Math.ceil(15*(outcome-e))); //fix
-	// 	//if win, outcome=1,if lose, outcome = 0;
+	function doneMatch(winner,loser) {
+		var eWin = calcExpectancy(winner,loser);
+		var eLose = calcExpectancy(loser,winner);
+		updateRanking(winner,eWin,1);
+		updateRanking(loser,eLose,0);
+	}
+	function calcExpectancy(a, b) {
+		var rA = sessionStorage.getItem(a+"Rank");
+		var rB = sessionStorage.getItem(b+"Rank");
+		var eA = (1/(1 + Math.pow(10,((rB - rA)/200))));
+		return eA;
+	}
+	function updateRanking(name,e,outcome) {
+		var curRank = sessionStorage.getItem(name+"Rank");//name of rank
+		sessionStorage.setItem((name+"Rank"),parseInt(curRank) + Math.ceil(15*(outcome-e)));//e given by calcExpectancy
+		//name.setRanking(name.getRanking() + Math.ceil(15*(outcome-e))); //fix
+		//if win, outcome=1,if lose, outcome = 0;
+	}
+	// function submitRanks() {
+	// 	var Player = Parse.Object.extend("User");
+	// 	var queryWin = new Parse.Query(Player);
+	// 	var queryLose = new Parse.Query(Player);
+
+	// 	var winner = sessionStorage.getItem("winner");
+	// 	var loser = sessionStorage.getItem("loser");
+
+	// 	queryWin.equalTo("name",winner);
+	// 	queryLose.equalTo("name",loser);
+
+	// 	doneMatch(winner,loser);
+
+	// 	queryWin.first({
+ //            success: function (rankUpdate) {
+ //                rankUpdate.save(null, {
+ //                    success: function (player) {
+
+ //                        player.set("rank",(sessionStorage.getItem(winner+"Rank")));
+
+ //                        contact.save();
+ //                        location.reload();
+ //                    }
+ //                });
+
+ //            }
+ //        });
+	// 	// queryWin.find().then(function(playersW) {
+	// 	// 	//console.log("player id: " + playersW[0].id);
+	// 	// 	//winnerID = playersW[0].id;
+	// 	// 	playersW.set("rank",(sessionStorage.getItem(winner+"Rank")));
+
+	// 	// }
+
 	// }
 });
